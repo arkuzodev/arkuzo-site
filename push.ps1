@@ -26,9 +26,9 @@ if (-not $username -or $username.Trim() -eq "") {
 }
 
 if ($token.StartsWith("github_pat_")) {
-    $remoteUrl = "https://x-access-token:$token@github.com/$username/$repo.git"
+    $remoteUrl = "https://x-access-token:${token}@github.com/${username}/${repo}.git"
 } else {
-    $remoteUrl = "https://$username:$token@github.com/$username/$repo.git"
+    $remoteUrl = "https://${token}@github.com/${username}/${repo}.git"
 }
 
 git remote remove origin 2>$null
