@@ -4,145 +4,1457 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Arkuzo — Gaming, Community &amp; Technology</title>
-  <meta name="description" content="Arkuzo is a modern gaming community where players meet, squad up, share ideas, create projects, and build with technology.">
+  <meta name="description" content="Arkuzo is a premium gaming community and technology collective where players squad up, creators share highlights, and developers build modern digital solutions.">
   <link rel="canonical" href="https://arkuzo.lol/">
-  <meta property="og:type" content="website"><meta property="og:url" content="https://arkuzo.lol/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://arkuzo.lol/">
   <meta property="og:title" content="Arkuzo — Gaming, Community &amp; Technology">
   <meta property="og:description" content="Your next squad starts here. Join Arkuzo for games, conversation, creativity, and technology.">
-  <meta name="twitter:card" content="summary"><meta name="twitter:title" content="Arkuzo — Gaming, Community &amp; Technology">
+  <meta property="og:image" content="https://arkuzo.lol/assets/banner.svg?v=5">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Arkuzo — Gaming, Community &amp; Technology">
   <meta name="twitter:description" content="Your next squad starts here. Join Arkuzo for games, conversation, creativity, and technology.">
+  <meta name="twitter:image" content="https://arkuzo.lol/assets/banner.svg?v=5">
   <meta name="theme-color" content="#05070d">
-  <link rel="icon" href="assets/logo.svg?v=4" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/logo.svg?v=5" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=5">
   <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <div class="intro" data-intro aria-hidden="true"><div class="intro-mark"><img src="assets/logo.svg?v=4" alt=""><i></i><i></i><span></span></div><p>ENTER ARKUZO</p></div>
+
+  <!-- Reading Progress Bar -->
+  <div class="nav-progress" id="nav-progress" aria-hidden="true"></div>
+
+  <!-- Cinematic Intro Sequence -->
+  <div class="intro" data-intro aria-hidden="true">
+    <div class="intro-mark">
+      <img src="assets/logo.svg?v=5" alt="">
+      <i></i><i></i><span></span>
+    </div>
+    <p>ENTER ARKUZO</p>
+  </div>
+
+  <!-- Ambient Pointer Aura -->
   <div class="pointer-aura" aria-hidden="true"></div>
 
+  <!-- Global Toast / Clipboard Feedback -->
+  <div class="copy-toast" id="copy-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <dialog class="launcher-dialog" id="arkuzo-launcher" aria-label="Arkuzo Launcher" aria-modal="true">
+    <div class="launcher-backdrop" data-launcher-close aria-hidden="true"></div>
+    <div class="launcher-window">
+      <div class="launcher-header">
+        <div class="launcher-search-box">
+          <svg class="launcher-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="9" cy="9" r="6"/>
+            <path d="m13.5 13.5 4 4"/>
+          </svg>
+          <input type="search" id="launcher-search" class="launcher-input" placeholder="Search sections, actions, or Discord..." autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="launcher-results" aria-label="Search sections, actions, or Discord" aria-activedescendant="launcher-item-0">
+          <button type="button" class="launcher-esc" data-launcher-close aria-label="Close launcher">ESC</button>
+        </div>
+      </div>
+      <div class="launcher-results" id="launcher-results" role="listbox" aria-label="Command suggestions">
+        <a class="launcher-item active" id="launcher-item-0" role="option" aria-selected="true" tabindex="-1" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer" data-launcher-action data-keywords="discord join voice chat server lounge community gaming">
+          <span class="launcher-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.3 4.4A19.7 19.7 0 0 0 15.3 2.9a.1.1 0 0 0-.1.1 13.7 13.7 0 0 0-.6 1.3 18.2 18.2 0 0 0-5.2 0 13.7 13.7 0 0 0-.6-1.3.1.1 0 0 0-.1-.1 19.7 19.7 0 0 0-5 1.5.1.1 0 0 0-.1 0C.6 9 0 13.5.3 17.9a.1.1 0 0 0 .1.1 19.8 19.8 0 0 0 6 3 .1.1 0 0 0 .1 0 14.1 14.1 0 0 0 1.2-2 .1.1 0 0 0-.1-.1 13 13 0 0 1-1.9-.9.1.1 0 0 1 0-.2c.1-.1.3-.2.4-.3a14.2 14.2 0 0 0 12 0c.1.1.3.2.4.3a.1.1 0 0 1 0 .2 13 13 0 0 1-1.9.9.1.1 0 0 0-.1.1c.3.7.8 1.4 1.2 2a.1.1 0 0 0 .1 0 19.8 19.8 0 0 0 6-3 .1.1 0 0 0 .1-.1c.4-5.1-.7-9.5-3.4-13.4ZM8.5 15.3c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4c0 1.3-1 2.4-2.2 2.4Zm7 0c-1.2 0-2.2-1.1-2.2-2.4s1-2.4 2.2-2.4 2.2 1.1 2.2 2.4c0 1.3-1 2.4-2.2 2.4Z"/>
+            </svg>
+          </span>
+          <span class="launcher-item-body">
+            <span class="launcher-item-title">Join Discord</span>
+            <span class="launcher-item-desc">Drop into voice rooms, squad lobbies, and active lounges</span>
+          </span>
+          <span class="launcher-item-badge">External ↗</span>
+        </a>
+        <a class="launcher-item" id="launcher-item-1" role="option" aria-selected="false" tabindex="-1" href="#gaming" data-launcher-action data-keywords="explore gaming casual competitive cooperative events lobbies">
+          <span class="launcher-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="6" width="20" height="12" rx="4"/>
+              <path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/>
+            </svg>
+          </span>
+          <span class="launcher-item-body">
+            <span class="launcher-item-title">Explore Gaming</span>
+            <span class="launcher-item-desc">Casual, competitive, cooperative modes and community game nights</span>
+          </span>
+          <span class="launcher-item-badge">#gaming</span>
+        </a>
+        <a class="launcher-item" id="launcher-item-2" role="option" aria-selected="false" tabindex="-1" href="#path" data-launcher-action data-keywords="find your path role player squad builder creator developer choose">
+          <span class="launcher-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+            </svg>
+          </span>
+          <span class="launcher-item-body">
+            <span class="launcher-item-title">Find Your Path</span>
+            <span class="launcher-item-desc">Choose between Player, Squad Builder, Creator, and Developer roles</span>
+          </span>
+          <span class="launcher-item-badge">#path</span>
+        </a>
+        <a class="launcher-item" id="launcher-item-3" role="option" aria-selected="false" tabindex="-1" href="#community" data-launcher-action data-keywords="view community atmosphere members culture vibe meet voice">
+          <span class="launcher-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </span>
+          <span class="launcher-item-body">
+            <span class="launcher-item-title">View Community</span>
+            <span class="launcher-item-desc">Discover our culture, night lounges, clip tracks, and projects</span>
+          </span>
+          <span class="launcher-item-badge">#community</span>
+        </a>
+        <a class="launcher-item" id="launcher-item-4" role="option" aria-selected="false" tabindex="-1" href="#technology" data-launcher-action data-keywords="explore coding solutions technology bots development tools stack">
+          <span class="launcher-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </span>
+          <span class="launcher-item-body">
+            <span class="launcher-item-title">Explore Coding Solutions</span>
+            <span class="launcher-item-desc">Interactive terminal, bot frameworks, and open technical architecture</span>
+          </span>
+          <span class="launcher-item-badge">#technology</span>
+        </a>
+        <a class="launcher-item" id="launcher-item-5" role="option" aria-selected="false" tabindex="-1" href="#brief-builder" data-launcher-action data-keywords="build project brief quote request custom tool hire bot estimate">
+          <span class="launcher-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </span>
+          <span class="launcher-item-body">
+            <span class="launcher-item-title">Build a Project Brief</span>
+            <span class="launcher-item-desc">Configure scope, select technology, and generate a client project brief</span>
+          </span>
+          <span class="launcher-item-badge">#brief-builder</span>
+        </a>
+        <a class="launcher-item" id="launcher-item-6" role="option" aria-selected="false" tabindex="-1" href="#faq" data-launcher-action data-keywords="open faq questions help answer rules join cost free safe">
+          <span class="launcher-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </span>
+          <span class="launcher-item-body">
+            <span class="launcher-item-title">Open FAQ</span>
+            <span class="launcher-item-desc">Frequently asked questions regarding membership, safety, and activities</span>
+          </span>
+          <span class="launcher-item-badge">#faq</span>
+        </a>
+        <a class="launcher-item" id="launcher-item-7" role="option" aria-selected="false" tabindex="-1" href="#home" data-launcher-action data-keywords="return to top home scroll start hero gateway main">
+          <span class="launcher-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="16 12 12 8 8 12"/>
+              <line x1="12" y1="16" x2="12" y2="8"/>
+            </svg>
+          </span>
+          <span class="launcher-item-body">
+            <span class="launcher-item-title">Return to Top</span>
+            <span class="launcher-item-desc">Scroll back to the top hero gateway and live network graph</span>
+          </span>
+          <span class="launcher-item-badge">#home</span>
+        </a>
+        <div class="launcher-empty" id="launcher-empty" role="status" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            <line x1="8" y1="11" x2="14" y2="11"/>
+          </svg>
+          <span>No matching commands found.</span>
+        </div>
+      </div>
+      <div class="launcher-footer">
+        <div class="launcher-hints">
+          <span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+          <span><kbd>↵</kbd> Select</span>
+          <span><kbd>ESC</kbd> Close</span>
+        </div>
+        <div class="launcher-tag">Arkuzo Gateway v2.5</div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Sticky Header -->
   <header class="header" data-header>
     <nav class="nav wrap" aria-label="Primary navigation">
-      <a class="brand" href="#home" aria-label="Arkuzo home"><img src="assets/banner.svg?v=4" alt="Arkuzo"></a>
-      <div class="nav-state" aria-hidden="true"><i></i><span>COMMUNITY NETWORK</span></div>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation"><span></span><span></span></button>
-      <div class="nav-menu" id="nav-menu"><a href="#home">Home</a><a href="#community">Community</a><a href="#gaming">Gaming</a><a href="#technology">Coding</a><a href="#faq">FAQ</a><a class="button compact" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">Join Discord <span>↗</span></a></div>
+      <a class="brand" href="#home" aria-label="Arkuzo home">
+        <img src="assets/banner.svg?v=5" alt="Arkuzo">
+      </a>
+      
+      <div class="nav-center-group">
+        <div class="nav-state" aria-hidden="true">
+          <i></i><span>COMMUNITY NETWORK</span>
+        </div>
+        <button class="launcher-trigger" type="button" aria-haspopup="dialog" aria-controls="arkuzo-launcher" aria-label="Open Arkuzo Launcher (Press Ctrl+K)">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="8.5" cy="8.5" r="5.5"/>
+            <path d="m12.5 12.5 4 4"/>
+          </svg>
+          <span class="launcher-text">Launcher</span>
+          <kbd class="launcher-kbd" aria-hidden="true">Ctrl K</kbd>
+        </button>
+        <noscript>
+          <a class="launcher-trigger" href="#nav-menu" aria-label="Jump to site navigation">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="8.5" cy="8.5" r="5.5"/>
+              <path d="m12.5 12.5 4 4"/>
+            </svg>
+            <span class="launcher-text">Quick Menu</span>
+          </a>
+        </noscript>
+      </div>
+
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation">
+        <span></span><span></span>
+      </button>
+
+      <div class="nav-menu" id="nav-menu">
+        <a href="#home">Home</a>
+        <a href="#community">Community</a>
+        <a href="#path">Choose Path</a>
+        <a href="#story">Story</a>
+        <a href="#gaming">Gaming</a>
+        <a href="#technology">Coding</a>
+        <a href="#brief-builder">Brief Builder</a>
+        <a href="#faq">FAQ</a>
+        <a class="button compact" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">Join Discord <span>↗</span></a>
+      </div>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero" id="home" data-section>
+    <!-- HERO SECTION: Interactive Gateway -->
+    <section class="hero" id="home" data-section aria-label="Arkuzo Welcome">
       <canvas class="hero-canvas" data-network aria-hidden="true"></canvas>
       <div class="hero-spotlight" aria-hidden="true"></div>
+      
       <div class="wrap hero-layout">
         <div class="hero-copy">
-          <div class="overline hero-enter"><i></i><span>PLAY · CONNECT · CREATE</span></div>
-          <h1 class="hero-enter">Your next squad<br><em>starts here.</em></h1>
-          <p class="hero-lead hero-enter">Arkuzo brings players, creators, technology enthusiasts, and builders into one connected community—ready for the next round, conversation, or idea.</p>
-          <div class="hero-actions hero-enter"><a class="button primary magnetic" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 5.3A17 17 0 0 0 15.4 4l-.5 1.1a15 15 0 0 0-5.8 0L8.6 4a17 17 0 0 0-4.1 1.3C1.9 9.2 1.2 13 1.6 16.8a17 17 0 0 0 5 2.5l1.2-1.6-1.8-.9.4-.3a13 13 0 0 0 11.2 0l.5.3-1.9.9 1.2 1.6a17 17 0 0 0 5-2.5c.5-4.4-.8-8.2-2.9-11.5ZM8.7 14.6c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Zm6.6 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Z"/></svg>Join the Community</a><a class="arrow-link" href="#community">Explore Arkuzo <span>↓</span></a></div>
-          <div class="discord-presence hero-enter"><i></i><span>Official Discord gateway</span><b>Open to players &amp; builders</b></div>
+          <div class="overline hero-step" data-hero-order="1">
+            <i></i><span>PLAY · CONNECT · CREATE</span>
+          </div>
+
+          <h1 class="hero-title hero-step" data-hero-order="2">
+            <span class="line-wrap"><span class="line">Your next squad</span></span>
+            <span class="line-wrap"><span class="line"><em>starts here.</em></span></span>
+          </h1>
+
+          <p class="hero-lead hero-step" data-hero-order="3">
+            Arkuzo brings players, creators, technology enthusiasts, and builders into one connected community—ready for the next round, conversation, or collaborative idea.
+          </p>
+
+          <div class="hero-actions hero-step" data-hero-order="4">
+            <a class="button primary large magnetic" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19.5 5.3A17 17 0 0 0 15.4 4l-.5 1.1a15 15 0 0 0-5.8 0L8.6 4a17 17 0 0 0-4.1 1.3C1.9 9.2 1.2 13 1.6 16.8a17 17 0 0 0 5 2.5l1.2-1.6-1.8-.9.4-.3a13 13 0 0 0 11.2 0l.5.3-1.9.9 1.2 1.6a17 17 0 0 0 5-2.5c.5-4.4-.8-8.2-2.9-11.5ZM8.7 14.6c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Zm6.6 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Z"/>
+              </svg>
+              Join the Community
+            </a>
+            <a class="arrow-link" href="#community">Explore Arkuzo <span>↓</span></a>
+          </div>
+
+          <div class="discord-presence hero-step" data-hero-order="5">
+            <i></i><span>Official Discord Gateway</span><b>Open to players &amp; builders</b>
+          </div>
         </div>
-        <div class="network-stage hero-enter" data-parallax aria-hidden="true">
-          <div class="network-ring ring-a"></div><div class="network-ring ring-b"></div><div class="network-ring ring-c"></div>
-          <svg class="network-lines" viewBox="0 0 700 700"><path d="M350 350 125 180M350 350 560 132M350 350 616 420M350 350 180 566M125 180 560 132M616 420 180 566"/><path class="flow" d="M350 350 125 180M350 350 560 132M350 350 616 420M350 350 180 566"/></svg>
-          <div class="network-core"><span></span><img src="assets/logo.svg?v=4" alt=""><b>ARKUZO</b></div>
-          <div class="network-node node-a"><i></i><span>VOICE</span><b>Conversation active</b><em class="wave"><u></u><u></u><u></u></em></div>
-          <div class="network-node node-b"><i></i><span>SQUADS</span><b>Ready to connect</b></div>
-          <div class="network-node node-c"><i></i><span>PROJECTS</span><b>Ideas in motion</b></div>
-          <div class="network-node node-d"><i></i><span>GAMES</span><b>Next session</b></div>
+
+        <!-- Interactive Arkuzo Network Centerpiece -->
+        <div class="network-stage hero-step" data-hero-order="6" data-parallax aria-label="Interactive Arkuzo Network diagram">
+          <div class="network-ring ring-a" aria-hidden="true"></div>
+          <div class="network-ring ring-b" aria-hidden="true"></div>
+          <div class="network-ring ring-c" aria-hidden="true"></div>
+          
+          <!-- Reactive SVG Connection Paths -->
+          <svg class="network-lines" viewBox="0 0 700 700" aria-hidden="true">
+            <defs>
+              <linearGradient id="netGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0757e8" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#4fe7ff" stop-opacity="0.9"/>
+              </linearGradient>
+            </defs>
+            <!-- Background structural grid lines -->
+            <path class="net-grid" d="M350 350 L140 180 M350 350 L560 150 M350 350 L610 390 M350 350 L500 590 M350 350 L200 580 M350 350 L90 380"/>
+            <polygon class="net-perimeter" points="140,180 560,150 610,390 500,590 200,580 90,380"/>
+            <!-- Dynamic highlighted paths updated via JS/CSS -->
+            <path class="net-active-line" id="net-active-line" d="M350 350 L140 180"/>
+            <!-- Animated photon pulses along network -->
+            <circle class="net-photon p1" r="3" cx="350" cy="350"/>
+            <circle class="net-photon p2" r="3" cx="350" cy="350"/>
+            <circle class="net-photon p3" r="3" cx="350" cy="350"/>
+          </svg>
+
+          <!-- Central Illuminated AZ Core -->
+          <div class="network-core" id="network-core">
+            <div class="core-glow" aria-hidden="true"></div>
+            <img src="assets/logo.svg?v=5" alt="Arkuzo AZ Emblem">
+            <b>ARKUZO</b>
+            <span class="core-status">CORE ACTIVE</span>
+          </div>
+
+          <!-- 6 Orbiting Interactive Community Nodes -->
+          <!-- 1. Gaming Node -->
+          <a class="network-node node-gaming" href="#gaming" data-node="gaming" data-target="#gaming" aria-label="Gaming node: Casual and competitive lobbies. Click to scroll to gaming.">
+            <div class="node-badge"><i></i><span>GAMING</span></div>
+            <b class="node-title">Lobbies &amp; Sessions</b>
+            <span class="node-tooltip">Explore game modes <span>↓</span></span>
+          </a>
+
+          <!-- 2. Squads Node -->
+          <a class="network-node node-squads" href="#community" data-node="squads" data-target="#community" aria-label="Squads node: Find teammates and co-op rosters. Click to scroll to community.">
+            <div class="node-badge"><i></i><span>SQUADS</span></div>
+            <b class="node-title">Team Finder</b>
+            <span class="node-tooltip">Connect with squads <span>↓</span></span>
+          </a>
+
+          <!-- 3. Voice Node -->
+          <a class="network-node node-voice" href="#community" data-node="voice" data-target="#community" aria-label="Voice node: Drop-in conversation lounges. Click to scroll to community.">
+            <div class="node-badge"><i></i><span>VOICE</span></div>
+            <b class="node-title">Live Lounge</b>
+            <em class="wave" aria-hidden="true"><u></u><u></u><u></u><u></u></em>
+            <span class="node-tooltip">Active voice rooms <span>↓</span></span>
+          </a>
+
+          <!-- 4. Creators Node -->
+          <a class="network-node node-creators" href="#path" data-node="creators" data-target="#path" aria-label="Creators node: Clips, streaming and art. Click to view paths.">
+            <div class="node-badge"><i></i><span>CREATORS</span></div>
+            <b class="node-title">Clips &amp; Media</b>
+            <span class="node-tooltip">Showcase moments <span>↓</span></span>
+          </a>
+
+          <!-- 5. Tech Node -->
+          <a class="network-node node-tech" href="#technology" data-node="tech" data-target="#technology" aria-label="Tech node: Code, bots, and digital tools. Click to scroll to coding.">
+            <div class="node-badge"><i></i><span>TECH</span></div>
+            <b class="node-title">Digital Solutions</b>
+            <span class="node-tooltip">Explore tech stack <span>↓</span></span>
+          </a>
+
+          <!-- 6. Projects Node -->
+          <a class="network-node node-projects" href="#brief-builder" data-node="projects" data-target="#brief-builder" aria-label="Projects node: Collaborative builds. Click to open brief builder.">
+            <div class="node-badge"><i></i><span>PROJECTS</span></div>
+            <b class="node-title">Brief Builder</b>
+            <span class="node-tooltip">Generate project brief <span>↓</span></span>
+          </a>
+
+          <!-- Dynamic Active Info Bar for Nodes -->
+          <div class="network-status-bar" id="network-status-bar" aria-live="polite">
+            <span class="status-indicator"></span>
+            <span class="status-text">Select any node to navigate or explore</span>
+          </div>
         </div>
       </div>
-      <div class="hero-foot wrap"><span>01 — COMMUNITY FIRST</span><i></i><a href="#community">SCROLL TO ENTER <b>↓</b></a></div>
+
+      <div class="hero-foot wrap">
+        <span>01 — COMMUNITY FIRST</span>
+        <div class="foot-signal" aria-hidden="true"><i></i><i></i><i></i></div>
+        <a href="#community">SCROLL TO ENTER <b>↓</b></a>
+      </div>
     </section>
 
-    <section class="atmosphere section" id="community" data-section>
+    <!-- Transition Line: Hero -> Community -->
+    <div class="section-bridge" aria-hidden="true">
+      <div class="bridge-line"></div>
+      <div class="bridge-beacon"></div>
+    </div>
+
+    <section class="atmosphere section" id="community" data-section aria-labelledby="comm-title">
       <div class="wrap">
-        <header class="section-intro reveal"><div><span class="kicker">Inside Arkuzo</span><h2>A community with<br><em>a pulse.</em></h2></div><p>More than a list of channels. Arkuzo is a living space for finding people, sharing moments, joining conversations, and making the next thing together.</p></header>
+        <header class="section-intro reveal">
+          <div>
+            <span class="kicker">Inside Arkuzo</span>
+            <h2 id="comm-title">An illustrative<br><em>gathering space.</em></h2>
+          </div>
+          <p>
+            An honest structural view of how Arkuzo connects players, squads, voice lounges, and creative builders. Explore the interactive topology below—each node and channel represents an architectural space rather than simulated activity.
+          </p>
+        </header>
+
+        <div class="sr-only" id="community-live-region" aria-live="polite"></div>
+
         <div class="community-mosaic">
           <article class="mosaic-main reveal" data-delay="0">
-            <div class="panel-head"><span><img src="assets/logo.svg?v=4" alt="">ARKUZO COMMUNITY</span><b><i></i>LIVE SPACE</b></div>
-            <div class="space-map" aria-hidden="true"><svg viewBox="0 0 700 420"><path d="M95 205C180 70 295 80 350 210S550 350 625 185"/><path d="M75 340C210 300 250 110 405 100S550 155 650 75"/></svg><span class="space-core"><img src="assets/logo.svg?v=4" alt=""></span><i class="point p1"></i><i class="point p2"></i><i class="point p3"></i><i class="point p4"></i></div>
-            <div class="room-focus"><small>ROOM IN FOCUS</small><h3>Voice Lounge</h3><p>Drop in, talk games, and stay for the people.</p><div class="voice-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="panel-head">
+              <span><img src="assets/logo.svg?v=5" alt="">ARKUZO TOPOLOGY</span>
+              <span class="illustrative-pill" title="Structural topology diagram"><i class="pulse-dot"></i>ILLUSTRATIVE SPACE</span>
+            </div>
+
+            <div class="space-map" id="community-space-map" data-active-node="voice" aria-label="Interactive community gathering topology">
+              <svg viewBox="0 0 700 420" class="space-routes-svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="route-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#4fe7ff" stop-opacity="0.8"/>
+                    <stop offset="100%" stop-color="#0757e8" stop-opacity="0.2"/>
+                  </linearGradient>
+                </defs>
+                <path class="route-line r-voice" d="M120 120 C 220 140, 260 210, 350 210"/>
+                <path class="route-line r-squad" d="M570 120 C 470 140, 440 210, 350 210"/>
+                <path class="route-line r-creator" d="M170 320 C 240 310, 270 240, 350 210"/>
+                <path class="route-line r-builder" d="M530 320 C 460 310, 430 240, 350 210"/>
+                <path class="route-line r-ring" d="M120 120 C 350 40, 570 120, 530 320 S 170 320, 120 120"/>
+
+                <circle class="ambient-particle ap1" cx="210" cy="155" r="3"/>
+                <circle class="ambient-particle ap2" cx="490" cy="155" r="3"/>
+                <circle class="ambient-particle ap3" cx="240" cy="275" r="3"/>
+                <circle class="ambient-particle ap4" cx="460" cy="275" r="3"/>
+              </svg>
+
+              <div class="space-core" aria-label="Arkuzo Gateway Hub">
+                <img src="assets/logo.svg?v=5" alt="">
+              </div>
+
+              <button type="button" class="space-node-btn node-voice active" data-space-node="voice" aria-pressed="true" aria-label="Voice Lounge Node: Drop-in audio lounges and conversations">
+                <span class="node-indicator"></span>
+                <span class="node-caption">VOICE HUB</span>
+              </button>
+
+              <button type="button" class="space-node-btn node-squad" data-space-node="squad" aria-pressed="false" aria-label="Squad Roster Node: Team coordination and role matching">
+                <span class="node-indicator"></span>
+                <span class="node-caption">SQUADS</span>
+              </button>
+
+              <button type="button" class="space-node-btn node-creator" data-space-node="creator" aria-pressed="false" aria-label="Creator Signal Node: Community clips, streams, and highlights">
+                <span class="node-indicator"></span>
+                <span class="node-caption">CREATORS</span>
+              </button>
+
+              <button type="button" class="space-node-btn node-builder" data-space-node="builder" aria-pressed="false" aria-label="Tech Lab Node: Discord bots, software architecture, and tools">
+                <span class="node-indicator"></span>
+                <span class="node-caption">TECH LAB</span>
+              </button>
+            </div>
+
+            <div class="room-focus" id="room-focus-panel" role="region" aria-label="Selected space details">
+              <div class="room-meta">
+                <span class="meta-badge" id="focus-meta-badge">ILLUSTRATIVE NODE ARCHITECTURE</span>
+                <span class="channel-tag" id="focus-channel-tag">#voice-lounge</span>
+              </div>
+              <h3 id="focus-heading">Voice Lounge</h3>
+              <p id="focus-description">Drop-in audio spaces with low pressure. Hop in to talk game balance, coordinate upcoming sessions, or listen while hanging out between matches.</p>
+
+              <div class="voice-indicators-wrap">
+                <div class="voice-channel-selector" role="group" aria-label="Voice indicator mode">
+                  <button type="button" class="v-channel-btn active" data-voice-mode="lounge" aria-pressed="true">Open Lounge</button>
+                  <button type="button" class="v-channel-btn" data-voice-mode="comms" aria-pressed="false">Tactical Comms</button>
+                  <button type="button" class="v-channel-btn" data-voice-mode="quiet" aria-pressed="false">Late Hangout</button>
+                </div>
+
+                <div class="voice-spectrum" aria-hidden="true">
+                  <div class="voice-bars" id="community-voice-bars" data-mode="lounge">
+                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  </div>
+                  <span class="voice-label" id="community-voice-label">ILLUSTRATIVE FREQUENCY SPECTRUM (LOUNGE)</span>
+                </div>
+              </div>
+            </div>
           </article>
-          <article class="mosaic-card squads reveal tilt" data-delay="1"><span class="panel-index">01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m7-10a4 4 0 1 0 0-8m13 18v-2a4 4 0 0 0-3-3.9m-2-12a4 4 0 0 1 0 7.8"/></svg><h3>Squad Finder</h3><p>Connect around your pace and play style.</p><div class="avatars"><i></i><i></i><i></i><span>OPEN ROOM</span></div></article>
-          <article class="mosaic-card night reveal tilt" data-delay="2"><span class="panel-index">02</span><div class="night-orbit"><i></i><i></i><span></span></div><h3>Game Night</h3><p>Community play, from relaxed sessions to focused runs.</p></article>
-          <article class="mosaic-wide reveal" data-delay="3"><div><small>SHARE WHAT MATTERS</small><h3>Clips &amp; Highlights</h3></div><div class="clip-track"><span><i></i>MEMORABLE MOMENT</span><span><i></i>COMMUNITY REACTION</span><span><i></i>NEXT ROUND</span></div></article>
-          <article class="mosaic-stack reveal" data-delay="4"><div><span>TECH CORNER</span><b>Discuss tools, code, and emerging ideas.</b></div><div><span>COMMUNITY PROJECTS</span><b>Bring work in progress into the open.</b></div></article>
+
+          <article class="mosaic-card squads reveal tilt" data-delay="1">
+            <div class="card-top-bar">
+              <span class="panel-index">01</span>
+              <span class="illustrative-pill"><i class="pulse-dot"></i>ROSTER MODEL</span>
+            </div>
+            <div class="card-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m7-10a4 4 0 1 0 0-8m13 18v-2a4 4 0 0 0-3-3.9m-2-12a4 4 0 0 1 0 7.8"/></svg>
+            </div>
+            <h3>Squad Roster Card</h3>
+            <p>Illustrative team composition model showing balanced role distribution and communication readiness.</p>
+
+            <div class="squad-roles-grid" role="group" aria-label="Squad role configuration">
+              <button type="button" class="squad-slot-btn active" data-role="vanguard" aria-pressed="true" aria-label="Slot 1: Vanguard (Frontline lead)">
+                <span class="slot-role-tag">ROLE 01</span>
+                <span class="slot-role-name">Vanguard</span>
+                <span class="slot-status-pill">Frontline</span>
+              </button>
+              <button type="button" class="squad-slot-btn" data-role="recon" aria-pressed="false" aria-label="Slot 2: Recon (Information and flanks)">
+                <span class="slot-role-tag">ROLE 02</span>
+                <span class="slot-role-name">Recon</span>
+                <span class="slot-status-pill">Flanks</span>
+              </button>
+              <button type="button" class="squad-slot-btn" data-role="support" aria-pressed="false" aria-label="Slot 3: Support (Utility and team rhythm)">
+                <span class="slot-role-tag">ROLE 03</span>
+                <span class="slot-role-name">Support</span>
+                <span class="slot-status-pill">Utility</span>
+              </button>
+              <button type="button" class="squad-slot-btn" data-role="tactician" aria-pressed="false" aria-label="Slot 4: Tactician (Calls and strategy)">
+                <span class="slot-role-tag">ROLE 04</span>
+                <span class="slot-role-name">Tactician</span>
+                <span class="slot-status-pill">Comms</span>
+              </button>
+            </div>
+            <div class="squad-slot-readout" id="squad-slot-readout">
+              <span class="slot-readout-label">INSPECTED ROLE:</span> <b id="squad-readout-role">Vanguard</b> — Primary engagement, initiating pushes and creating space for team follow-up.
+            </div>
+          </article>
+
+          <article class="mosaic-card night reveal tilt" data-delay="2">
+            <div class="card-top-bar">
+              <span class="panel-index">02</span>
+              <span class="illustrative-pill"><i class="pulse-dot"></i>ROTATION MODEL</span>
+            </div>
+            <div class="night-orbit" aria-hidden="true">
+              <i></i><i></i><span></span>
+            </div>
+            <h3>Community Sessions</h3>
+            <p>Illustrative scheduling framework balancing relaxed party games with high-stakes bracket runs.</p>
+            <div class="session-pills-list" role="group" aria-label="Session categories">
+              <button type="button" class="session-pill-btn active" data-session="casual" aria-pressed="true">Casual Party</button>
+              <button type="button" class="session-pill-btn" data-session="bracket" aria-pressed="false">Bracket Runs</button>
+              <button type="button" class="session-pill-btn" data-session="coop" aria-pressed="false">Co-op Raids</button>
+            </div>
+            <div class="session-readout" id="session-readout">
+              <b>Casual Party:</b> Low-pressure drop-in game nights open to every member regardless of ranking.
+            </div>
+          </article>
+
+          <article class="mosaic-wide reveal" data-delay="3">
+            <div class="wide-head">
+              <div class="wide-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              </div>
+              <div>
+                <span class="illustrative-tag">CREATOR SIGNALS</span>
+                <h3>Clips &amp; Creative Signals</h3>
+              </div>
+            </div>
+            <div class="creator-signals-track" role="group" aria-label="Creator signal relays">
+              <button type="button" class="creator-signal-btn active" data-signal="clutch" aria-pressed="true">
+                <i class="signal-dot"></i>
+                <span class="signal-title">CLUTCH REEL</span>
+                <span class="signal-desc">Match-winning plays</span>
+              </button>
+              <button type="button" class="creator-signal-btn" data-signal="montage" aria-pressed="false">
+                <i class="signal-dot"></i>
+                <span class="signal-title">COMMUNITY EDIT</span>
+                <span class="signal-desc">Curated highlights</span>
+              </button>
+              <button type="button" class="creator-signal-btn" data-signal="broadcast" aria-pressed="false">
+                <i class="signal-dot"></i>
+                <span class="signal-title">STREAM SIGNAL</span>
+                <span class="signal-desc">Live community showcases</span>
+              </button>
+            </div>
+            <a class="arrow-link" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">Creator Hub on Discord <span>↗</span></a>
+          </article>
+
+          <article class="mosaic-stack reveal" data-delay="4">
+            <div class="stack-tile" tabindex="0" role="button" aria-pressed="false" aria-label="Tech Lab panel. Software, bots, and architectures.">
+              <div class="tile-tag">TECH LAB</div>
+              <b>Discord bots, cloud automation, and high-performance web tooling.</b>
+              <span class="tile-link">Explore solutions <span>→</span></span>
+            </div>
+            <div class="stack-tile" tabindex="0" role="button" aria-pressed="false" aria-label="Community Projects panel. Collaborative builds and tools.">
+              <div class="tile-tag">COMMUNITY PROJECTS</div>
+              <b>Turn creative gaming concepts into functional open tools and bots.</b>
+              <span class="tile-link">Collaborate with us <span>→</span></span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="story section" aria-labelledby="story-title">
+    <!-- Transition Line: Community -> Path -->
+    <div class="section-bridge" aria-hidden="true">
+      <div class="bridge-line"></div>
+      <div class="bridge-beacon alt"></div>
+    </div>
+
+    <!-- NEW SECTION: CHOOSE YOUR PATH (Requirement 2) -->
+    <section class="path-section section" id="path" data-section aria-labelledby="path-title">
+      <div class="wrap">
+        <header class="section-intro reveal">
+          <div>
+            <span class="kicker">Choose Your Role</span>
+            <h2 id="path-title">Find your place<br><em>in Arkuzo.</em></h2>
+          </div>
+          <p>
+            Arkuzo is built for different play styles and skillsets. Choose how you want to participate, and discover the exact channels, activities, and teammates waiting for you.
+          </p>
+        </header>
+
+        <div class="path-controls reveal" role="tablist" aria-label="Choose your Arkuzo path">
+          <button class="path-tab active" id="tab-player" role="tab" aria-selected="true" aria-controls="panel-player" tabindex="0" data-path="player">
+            <span class="tab-index">01</span>
+            <span class="tab-label">Player</span>
+          </button>
+          <button class="path-tab" id="tab-squad" role="tab" aria-selected="false" aria-controls="panel-squad" tabindex="-1" data-path="squad">
+            <span class="tab-index">02</span>
+            <span class="tab-label">Squad Builder</span>
+          </button>
+          <button class="path-tab" id="tab-creator" role="tab" aria-selected="false" aria-controls="panel-creator" tabindex="-1" data-path="creator">
+            <span class="tab-index">03</span>
+            <span class="tab-label">Creator</span>
+          </button>
+          <button class="path-tab" id="tab-developer" role="tab" aria-selected="false" aria-controls="panel-developer" tabindex="-1" data-path="developer">
+            <span class="tab-index">04</span>
+            <span class="tab-label">Developer</span>
+          </button>
+        </div>
+
+        <div class="path-display reveal" id="path-display">
+          <div class="path-panel active" id="panel-player" role="tabpanel" aria-labelledby="tab-player" data-path="player" data-theme="player">
+            <div class="path-info">
+              <div class="path-role-tag">
+                <span class="role-badge">ROLE: PLAYER</span>
+                <span class="role-dest">Destination: #gaming-lounge</span>
+              </div>
+              <h3 class="path-heading">Drop in, discover sessions, and play at your own pace.</h3>
+              <p class="path-desc">
+                Whether you want quick casual sessions after work or focused weekend lobbies, find people who share your titles and match your energy without any pressure to perform.
+              </p>
+              <div class="path-activities">
+                <span class="activity-title">COMMUNITY FOCUS</span>
+                <ul class="activity-list">
+                  <li><i>✦</i><span>Drop-in voice rooms for popular multiplayer titles</span></li>
+                  <li><i>✦</i><span>Zero-toxicity lobbies with like-minded players</span></li>
+                  <li><i>✦</i><span>Flexible session matchmaking whenever you're online</span></li>
+                </ul>
+              </div>
+              <div class="path-cta-row">
+                <a class="button primary magnetic" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">
+                  Join as a Player <span>↗</span>
+                </a>
+                <span class="path-note">Saved locally for your session</span>
+              </div>
+            </div>
+            <div class="path-visual" aria-hidden="true">
+              <div class="visual-canvas-box">
+                <svg class="path-svg" viewBox="0 0 400 400">
+                  <circle class="p-ring r1" cx="200" cy="200" r="140"/>
+                  <circle class="p-ring r2" cx="200" cy="200" r="90"/>
+                  <line class="p-cross h" x1="40" y1="200" x2="360" y2="200"/>
+                  <line class="p-cross v" x1="200" y1="40" x2="200" y2="360"/>
+                  <circle class="p-node pn1" cx="130" cy="140" r="7"/>
+                  <circle class="p-node pn2" cx="270" cy="140" r="7"/>
+                  <circle class="p-node pn3" cx="200" cy="280" r="7"/>
+                  <polygon class="p-poly" points="130,140 270,140 200,280"/>
+                  <circle class="p-core" cx="200" cy="200" r="18"/>
+                </svg>
+                <div class="visual-emblem">
+                  <img src="assets/logo.svg?v=5" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="path-panel" id="panel-squad" role="tabpanel" aria-labelledby="tab-squad" data-path="squad" data-theme="squad">
+            <div class="path-info">
+              <div class="path-role-tag">
+                <span class="role-badge">ROLE: SQUAD BUILDER</span>
+                <span class="role-dest">Destination: #squad-finder</span>
+              </div>
+              <h3 class="path-heading">Assemble consistent rosters and coordinate winning runs.</h3>
+              <p class="path-desc">
+                Form dedicated fireteams, rank-climbing squads, and weekly raid groups. Synchronize playtimes, roles, and game strategy with committed teammates who communicate.
+              </p>
+              <div class="path-activities">
+                <span class="activity-title">COMMUNITY FOCUS</span>
+                <ul class="activity-list">
+                  <li><i>✦</i><span>Role-based roster matchmaking and scheduling</span></li>
+                  <li><i>✦</i><span>Competitive callout-friendly voice channels</span></li>
+                  <li><i>✦</i><span>Strategy forums, loadout sharing, and stat tracking</span></li>
+                </ul>
+              </div>
+              <div class="path-cta-row">
+                <a class="button primary magnetic" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">
+                  Find Your Squad <span>↗</span>
+                </a>
+                <span class="path-note">Saved locally for your session</span>
+              </div>
+            </div>
+            <div class="path-visual" aria-hidden="true">
+              <div class="visual-canvas-box">
+                <svg class="path-svg" viewBox="0 0 400 400">
+                  <circle class="p-ring r1" cx="200" cy="200" r="140"/>
+                  <polygon class="p-poly" points="200,70 320,150 320,290 200,350 80,290 80,150"/>
+                  <line class="p-cross h" x1="80" y1="200" x2="320" y2="200"/>
+                  <line class="p-cross v" x1="200" y1="70" x2="200" y2="350"/>
+                  <circle class="p-node pn1" cx="200" cy="70" r="7"/>
+                  <circle class="p-node pn2" cx="320" cy="200" r="7"/>
+                  <circle class="p-node pn3" cx="200" cy="350" r="7"/>
+                  <circle class="p-node pn4" cx="80" cy="200" r="7"/>
+                  <circle class="p-core" cx="200" cy="200" r="22"/>
+                </svg>
+                <div class="visual-emblem">
+                  <img src="assets/logo.svg?v=5" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="path-panel" id="panel-creator" role="tabpanel" aria-labelledby="tab-creator" data-path="creator" data-theme="creator">
+            <div class="path-info">
+              <div class="path-role-tag">
+                <span class="role-badge">ROLE: CREATOR</span>
+                <span class="role-dest">Destination: #creator-showcase</span>
+              </div>
+              <h3 class="path-heading">Share moments, stream highlights, and grow your audience.</h3>
+              <p class="path-desc">
+                Get your clips, gameplay edits, stream announcements, and digital artwork seen. Collaborate with fellow editors, creators, and community members looking for fresh talent.
+              </p>
+              <div class="path-activities">
+                <span class="activity-title">COMMUNITY FOCUS</span>
+                <ul class="activity-list">
+                  <li><i>✦</i><span>Stream shoutouts and clip promotion feeds</span></li>
+                  <li><i>✦</i><span>Asset sharing, thumbnail feedback, and editing collabs</span></li>
+                  <li><i>✦</i><span>Community spotlight opportunities across official channels</span></li>
+                </ul>
+              </div>
+              <div class="path-cta-row">
+                <a class="button primary magnetic" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">
+                  Join as a Creator <span>↗</span>
+                </a>
+                <span class="path-note">Saved locally for your session</span>
+              </div>
+            </div>
+            <div class="path-visual" aria-hidden="true">
+              <div class="visual-canvas-box">
+                <svg class="path-svg" viewBox="0 0 400 400">
+                  <circle class="p-ring r1" cx="200" cy="200" r="140"/>
+                  <circle class="p-ring r2" cx="200" cy="200" r="105"/>
+                  <circle class="p-ring r3" cx="200" cy="200" r="70"/>
+                  <polygon class="p-poly" points="200,95 290,255 110,255"/>
+                  <circle class="p-node pn1" cx="200" cy="95" r="7"/>
+                  <circle class="p-node pn2" cx="290" cy="255" r="7"/>
+                  <circle class="p-node pn3" cx="110" cy="255" r="7"/>
+                  <circle class="p-core" cx="200" cy="200" r="24"/>
+                </svg>
+                <div class="visual-emblem">
+                  <img src="assets/logo.svg?v=5" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="path-panel" id="panel-developer" role="tabpanel" aria-labelledby="tab-developer" data-path="developer" data-theme="developer">
+            <div class="path-info">
+              <div class="path-role-tag">
+                <span class="role-badge">ROLE: DEVELOPER</span>
+                <span class="role-dest">Destination: #dev-lab</span>
+              </div>
+              <h3 class="path-heading">Engineer bots, craft tools, and architect interactive systems.</h3>
+              <p class="path-desc">
+                Collaborate on custom Discord infrastructure, automation bots, game mods, and web integrations. Push code, review technical architectures, and build tools the whole community uses.
+              </p>
+              <div class="path-activities">
+                <span class="activity-title">COMMUNITY FOCUS</span>
+                <ul class="activity-list">
+                  <li><i>✦</i><span>Open-source bot templates and API integrations</span></li>
+                  <li><i>✦</i><span>Architecture code reviews and technical jam sessions</span></li>
+                  <li><i>✦</i><span>Dedicated dev sandbox channels with webhook testing</span></li>
+                </ul>
+              </div>
+              <div class="path-cta-row">
+                <a class="button primary magnetic" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">
+                  Join as a Developer <span>↗</span>
+                </a>
+                <span class="path-note">Saved locally for your session</span>
+              </div>
+            </div>
+            <div class="path-visual" aria-hidden="true">
+              <div class="visual-canvas-box">
+                <svg class="path-svg" viewBox="0 0 400 400">
+                  <rect class="p-ring r1" x="70" y="70" width="260" height="260" rx="20"/>
+                  <rect class="p-ring r2" x="110" y="110" width="180" height="180" rx="12"/>
+                  <line class="p-cross h" x1="50" y1="200" x2="350" y2="200"/>
+                  <line class="p-cross v" x1="200" y1="50" x2="200" y2="350"/>
+                  <circle class="p-node pn1" cx="110" cy="110" r="7"/>
+                  <circle class="p-node pn2" cx="290" cy="110" r="7"/>
+                  <circle class="p-node pn3" cx="290" cy="290" r="7"/>
+                  <circle class="p-node pn4" cx="110" cy="290" r="7"/>
+                  <circle class="p-core" cx="200" cy="200" r="20"/>
+                </svg>
+                <div class="visual-emblem">
+                  <img src="assets/logo.svg?v=5" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Transition Line: Path -> Story -->
+    <div class="section-bridge" aria-hidden="true">
+      <div class="bridge-line"></div>
+      <div class="bridge-beacon"></div>
+    </div>
+
+    <section class="story section" id="story" data-section aria-labelledby="story-title">
       <div class="wrap story-grid">
-        <div class="story-visual reveal" data-story-visual>
-          <div class="story-top"><span>ARKUZO / COMMUNITY PATH</span><b>01</b></div>
-          <div class="story-scene"><svg viewBox="0 0 600 500"><path class="story-path" d="M110 370C165 120 390 90 492 210S410 420 245 350"/><circle cx="110" cy="370" r="8"/><circle cx="300" cy="125" r="8"/><circle cx="492" cy="210" r="8"/></svg><div class="story-core"><img src="assets/logo.svg?v=4" alt=""><span>MEET</span></div><div class="story-satellite s1">OPEN LOBBY</div><div class="story-satellite s2">VOICE ROOM</div><div class="story-satellite s3">SHARED IDEA</div></div>
-          <div class="story-status"><i></i><span>Finding your place in the network</span></div>
+        <div class="story-visual reveal" data-story-visual data-state="meet">
+          <div class="story-top">
+            <div class="story-progress-indicator" aria-hidden="true">
+              <span class="prog-label">COMMUNITY JOURNEY</span>
+              <div class="prog-track">
+                <div class="prog-fill" id="story-progress-fill" style="width: 20%;"></div>
+              </div>
+            </div>
+            <span class="story-stage-num" id="story-stage-num" aria-live="polite">01 / 05</span>
+          </div>
+
+          <div class="story-scene" aria-hidden="true">
+            <svg class="story-svg" viewBox="0 0 600 500">
+              <circle class="s-orbit o1" cx="300" cy="250" r="190"/>
+              <circle class="s-orbit o2" cx="300" cy="250" r="125"/>
+              <circle class="s-orbit o3" cx="300" cy="250" r="60"/>
+
+              <path class="story-wire w1" d="M120 150 L300 250"/>
+              <path class="story-wire w2" d="M480 150 L300 250"/>
+              <path class="story-wire w3" d="M160 380 L300 250"/>
+              <path class="story-wire w4" d="M440 380 L300 250"/>
+              <path class="story-wire w5" d="M300 70 L300 250"/>
+
+              <polygon class="story-squad-net" points="120,150 480,150 440,380 160,380"/>
+              <polygon class="story-grow-mesh" points="300,70 480,150 440,380 160,380 120,150"/>
+
+              <circle class="story-node sn1" cx="120" cy="150" r="8"/>
+              <circle class="story-node sn2" cx="480" cy="150" r="8"/>
+              <circle class="story-node sn3" cx="160" cy="380" r="8"/>
+              <circle class="story-node sn4" cx="440" cy="380" r="8"/>
+              <circle class="story-node sn5" cx="300" cy="70" r="8"/>
+            </svg>
+
+            <div class="story-core">
+              <img src="assets/logo.svg?v=5" alt="">
+              <span id="story-core-text">MEET</span>
+            </div>
+
+            <div class="story-satellite s1" id="story-sat-1">OPEN LOBBY</div>
+            <div class="story-satellite s2" id="story-sat-2">VOICE ROOM</div>
+            <div class="story-satellite s3" id="story-sat-3">SHARED TITLES</div>
+            <div class="story-satellite s4" id="story-sat-4">WELCOME SPACE</div>
+          </div>
+
+          <div class="story-status" aria-live="polite">
+            <i></i><span id="story-status-text">Stage 01: Discovering welcoming channels and open conversations</span>
+          </div>
         </div>
+
         <div class="story-copy">
-          <header class="reveal"><span class="kicker">One community. Three motions.</span><h2 id="story-title">Find the connection.<br><em>Follow where it leads.</em></h2></header>
-          <article class="story-step active" data-story="meet" data-index="01"><span>01</span><div><h3>Meet</h3><p>Enter a welcoming space built to make the first conversation easy. Find people who share your interests without needing to perform.</p></div></article>
-          <article class="story-step" data-story="play" data-index="02"><span>02</span><div><h3>Play</h3><p>Move from conversation into a lobby. Queue casually, coordinate seriously, or discover something unfamiliar together.</p></div></article>
-          <article class="story-step" data-story="create" data-index="03"><span>03</span><div><h3>Create</h3><p>Turn shared energy into clips, projects, tools, experiments, and ideas that pull more people into the community.</p></div></article>
+          <header class="reveal">
+            <span class="kicker">The Arkuzo Progression</span>
+            <h2 id="story-title">From first connection<br><em>to lasting impact.</em></h2>
+          </header>
+
+          <article class="story-step active" data-story="meet" data-index="01" tabindex="0" role="button" aria-pressed="true" aria-label="Stage 1: Meet People">
+            <span class="step-num">01</span>
+            <div>
+              <div class="step-badge">STAGE 01 · CONNECTION</div>
+              <h3>Meet People</h3>
+              <p>Enter an open, welcoming environment designed to take the friction out of meeting new gaming friends. Drop into open lounges, find people who share your favorite titles, and start conversations without awkward introductions.</p>
+            </div>
+          </article>
+
+          <article class="story-step" data-story="squad" data-index="02" tabindex="0" role="button" aria-pressed="false" aria-label="Stage 2: Form or Join Squad">
+            <span class="step-num">02</span>
+            <div>
+              <div class="step-badge">STAGE 02 · COORDINATION</div>
+              <h3>Form or Join a Squad</h3>
+              <p>Move naturally from casual conversation into focused team play. Match schedules, align roles, and lock in reliable co-op or competitive rosters with teammates who prioritize synergy and communication.</p>
+            </div>
+          </article>
+
+          <article class="story-step" data-story="play" data-index="03" tabindex="0" role="button" aria-pressed="false" aria-label="Stage 3: Play Together">
+            <span class="step-num">03</span>
+            <div>
+              <div class="step-badge">STAGE 03 · ACTION</div>
+              <h3>Play Together</h3>
+              <p>Queue into matches with voice coordination and shared energy. Whether it's relaxed community party game nights, grueling ranked climbs, or cooperative campaign clears, enjoy games with people who have your back.</p>
+            </div>
+          </article>
+
+          <article class="story-step" data-story="create" data-index="04" tabindex="0" role="button" aria-pressed="false" aria-label="Stage 4: Create Projects and Content">
+            <span class="step-num">04</span>
+            <div>
+              <div class="step-badge">STAGE 04 · CREATIVITY</div>
+              <h3>Create Projects &amp; Content</h3>
+              <p>Channel gaming moments into creative projects. Share clutch clips, edit montage highlights, collaborate on Discord bots, and build custom web dashboards alongside other community creators and developers.</p>
+            </div>
+          </article>
+
+          <article class="story-step" data-story="grow" data-index="05" tabindex="0" role="button" aria-pressed="false" aria-label="Stage 5: Grow in Community">
+            <span class="step-num">05</span>
+            <div>
+              <div class="step-badge">STAGE 05 · IMPACT</div>
+              <h3>Grow in Community</h3>
+              <p>Take on active community roles, organize tournaments and brackets, mentor emerging members, and help guide Arkuzo's long-term future while building lasting connections across gaming and tech disciplines.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="gaming section" id="gaming" data-section>
-      <div class="activity-rail" aria-hidden="true"><div>CASUAL SESSIONS <i></i> COMPETITIVE PLAY <i></i> CO-OP SQUADS <i></i> COMMUNITY EVENTS <i></i> DISCOVER TOGETHER <i></i> <span>CASUAL SESSIONS <i></i> COMPETITIVE PLAY <i></i> CO-OP SQUADS <i></i> COMMUNITY EVENTS <i></i> DISCOVER TOGETHER <i></i></span></div></div>
-      <div class="wrap gaming-head reveal"><div><span class="kicker">However you play</span><h2>Every session needs<br><em>the right people.</em></h2></div><p>Pick the energy. Arkuzo gives casual players, focused competitors, co-op regulars, and community explorers a shared starting point.</p></div>
+    <!-- Transition Line: Story -> Gaming -->
+    <div class="section-bridge" aria-hidden="true">
+      <div class="bridge-line"></div>
+      <div class="bridge-beacon alt"></div>
+    </div>
+
+    <!-- UPGRADED GAMING SECTION (Requirement 6) -->
+    <section class="gaming section" id="gaming" data-section aria-labelledby="gaming-title">
+      <!-- Scrolling Activity Rail -->
+      <div class="activity-rail" aria-hidden="true">
+        <div>
+          CASUAL SESSIONS <i></i> COMPETITIVE PLAY <i></i> CO-OP SQUADS <i></i> COMMUNITY EVENTS <i></i> DISCOVER TOGETHER <i></i>
+          <span>CASUAL SESSIONS <i></i> COMPETITIVE PLAY <i></i> CO-OP SQUADS <i></i> COMMUNITY EVENTS <i></i> DISCOVER TOGETHER <i></i></span>
+        </div>
+      </div>
+
+      <div class="wrap gaming-head reveal">
+        <div>
+          <span class="kicker">However you play</span>
+          <h2 id="gaming-title">Every session needs<br><em>the right people.</em></h2>
+        </div>
+        <p>Pick the energy. Arkuzo gives casual players, focused competitors, co-op regulars, and community explorers a shared starting point.</p>
+      </div>
+
       <div class="wrap mode-layout">
-        <div class="mode-nav reveal" role="tablist" aria-label="Gaming experiences"><button role="tab" aria-selected="true" data-mode="casual"><span>01</span>Casual</button><button role="tab" aria-selected="false" data-mode="competitive"><span>02</span>Competitive</button><button role="tab" aria-selected="false" data-mode="cooperative"><span>03</span>Cooperative</button><button role="tab" aria-selected="false" data-mode="events"><span>04</span>Community events</button></div>
-        <div class="mode-display reveal tilt" data-mode-display>
-          <div class="mode-copy"><span>PLAY MODE / <b>CASUAL</b></span><h3>Drop in.<br>Stay awhile.</h3><p>No pressure, no performance. Find a room, join a conversation, and play at your own pace.</p><div><i>OPEN VOICE</i><i>FLEXIBLE SQUADS</i></div></div>
-          <div class="mode-art" aria-hidden="true"><div class="arena-ring r1"></div><div class="arena-ring r2"></div><div class="arena-cross"></div><span class="player pl1"></span><span class="player pl2"></span><span class="player pl3"></span><span class="player pl4"></span><div class="mode-emblem"><img src="assets/logo.svg?v=4" alt=""></div></div>
+        <!-- Mode Navigation Tabs -->
+        <div class="mode-nav reveal" role="tablist" aria-label="Gaming experiences">
+          <button role="tab" id="mode-tab-casual" aria-selected="true" aria-controls="mode-panel-content" data-mode="casual" tabindex="0">
+            <span>01</span>Casual
+          </button>
+          <button role="tab" id="mode-tab-comp" aria-selected="false" aria-controls="mode-panel-content" data-mode="competitive" tabindex="-1">
+            <span>02</span>Competitive
+          </button>
+          <button role="tab" id="mode-tab-coop" aria-selected="false" aria-controls="mode-panel-content" data-mode="cooperative" tabindex="-1">
+            <span>03</span>Cooperative
+          </button>
+          <button role="tab" id="mode-tab-events" aria-selected="false" aria-controls="mode-panel-content" data-mode="events" tabindex="-1">
+            <span>04</span>Community events
+          </button>
+        </div>
+
+        <!-- Fixed-Height Mode Showcase Display -->
+        <div class="mode-display reveal tilt" data-mode-display id="mode-panel-content" role="tabpanel" tabindex="0" aria-labelledby="mode-tab-casual" data-active-mode="casual">
+          <div class="mode-copy" id="mode-copy-container" aria-live="polite" aria-atomic="true">
+            <span>PLAY MODE / <b id="mode-badge-tag">CASUAL</b></span>
+            <h3 id="mode-title">Drop in.<br>Stay awhile.</h3>
+            <p id="mode-lead">No pressure, no performance requirements. Find an open voice channel, join an ongoing conversation, and play at your own pace.</p>
+            <div class="mode-benefits" id="mode-pills">
+              <i>OPEN VOICE</i><i>FLEXIBLE SQUADS</i><i>CROSS-TITLE DISCOVERY</i>
+            </div>
+            <div class="mode-cta-row">
+              <a class="button primary magnetic" id="mode-cta" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">
+                Find Casual Squads <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="mode-art" id="mode-art-box" aria-hidden="true">
+            <!-- Mode 1: Casual Orbit Art -->
+            <div class="mode-visual-layer active" data-visual-mode="casual">
+              <div class="arena-ring r1"></div>
+              <div class="arena-ring r2"></div>
+              <div class="arena-cross"></div>
+              <span class="player pl1"></span>
+              <span class="player pl2"></span>
+              <span class="player pl3"></span>
+              <span class="player pl4"></span>
+              <div class="mode-emblem">
+                <img src="assets/logo.svg?v=5" alt="">
+              </div>
+            </div>
+
+            <!-- Mode 2: Competitive Tactical Art -->
+            <div class="mode-visual-layer" data-visual-mode="competitive">
+              <div class="tactical-grid"></div>
+              <div class="tactical-reticle"></div>
+              <div class="tactical-scanner"></div>
+              <div class="tactical-bracket b-top"></div>
+              <div class="tactical-bracket b-bottom"></div>
+              <div class="mode-emblem comp">
+                <img src="assets/logo.svg?v=5" alt="">
+              </div>
+            </div>
+
+            <!-- Mode 3: Cooperative Hex Art -->
+            <div class="mode-visual-layer" data-visual-mode="cooperative">
+              <div class="hex-ring"></div>
+              <svg class="hex-svg" viewBox="0 0 260 260">
+                <polygon points="130,20 230,75 230,185 130,240 30,185 30,75"/>
+                <polygon class="hex-inner" points="130,50 200,90 200,170 130,210 60,170 60,90"/>
+              </svg>
+              <div class="mode-emblem coop">
+                <img src="assets/logo.svg?v=5" alt="">
+              </div>
+            </div>
+
+            <!-- Mode 4: Community Events Arena Art -->
+            <div class="mode-visual-layer" data-visual-mode="events">
+              <div class="event-waves w1"></div>
+              <div class="event-waves w2"></div>
+              <div class="event-spotlight"></div>
+              <div class="mode-emblem events">
+                <img src="assets/logo.svg?v=5" alt="">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="discord section" aria-labelledby="discord-title">
-      <div class="discord-field" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-      <div class="discord-ghost" aria-hidden="true"><img src="assets/logo.svg?v=4" alt=""></div>
-      <div class="wrap discord-layout">
-        <div class="discord-copy reveal"><span class="kicker">This is where Arkuzo happens</span><h2 id="discord-title">Enter the<br><em>community.</em></h2><p>Find squads, join voice rooms, share clips, discuss projects, and become part of the conversations shaping Arkuzo.</p><a class="button primary large magnetic" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 5.3A17 17 0 0 0 15.4 4l-.5 1.1a15 15 0 0 0-5.8 0L8.6 4a17 17 0 0 0-4.1 1.3C1.9 9.2 1.2 13 1.6 16.8a17 17 0 0 0 5 2.5l1.2-1.6-1.8-.9.4-.3a13 13 0 0 0 11.2 0l.5.3-1.9.9 1.2 1.6a17 17 0 0 0 5-2.5c.5-4.4-.8-8.2-2.9-11.5ZM8.7 14.6c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Zm6.6 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Z"/></svg>Join Arkuzo on Discord</a><small>Players, creators, and developers are welcome.</small></div>
+    <!-- Transition Line: Gaming -> Discord -->
+    <div class="section-bridge" aria-hidden="true">
+      <div class="bridge-line"></div>
+      <div class="bridge-beacon"></div>
+    </div>
+
+    <!-- UPGRADED DISCORD CONVERSION GATEWAY (Requirement 8) -->
+    <section class="discord section" id="discord" data-section aria-labelledby="discord-title">
+      <div class="discord-field" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+      </div>
+      <div class="discord-ghost" aria-hidden="true">
+        <img src="assets/logo.svg?v=5" alt="">
+      </div>
+
+      <div class="wrap discord-layout" data-mouse-glow>
+        <div class="discord-copy reveal">
+          <span class="kicker">This is where Arkuzo happens</span>
+          <h2 id="discord-title">Enter the<br><em>community gateway.</em></h2>
+          <p>
+            Find your squad, join live voice lounges, showcase clips, discuss tech and gaming projects, and become an integral part of the conversations shaping Arkuzo.
+          </p>
+
+          <!-- Discord Features Checklist -->
+          <div class="discord-perks">
+            <div class="perk-item"><i>✓</i><span>Active voice lounges &amp; spontaneous game lobbies</span></div>
+            <div class="perk-item"><i>✓</i><span>Dedicated squad finder for fast matchmaking</span></div>
+            <div class="perk-item"><i>✓</i><span>Clips &amp; media channel to share highlights</span></div>
+            <div class="perk-item"><i>✓</i><span>Tech corner for software, bot &amp; tool development</span></div>
+          </div>
+
+          <div class="discord-btn-group">
+            <a class="button primary large magnetic" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19.5 5.3A17 17 0 0 0 15.4 4l-.5 1.1a15 15 0 0 0-5.8 0L8.6 4a17 17 0 0 0-4.1 1.3C1.9 9.2 1.2 13 1.6 16.8a17 17 0 0 0 5 2.5l1.2-1.6-1.8-.9.4-.3a13 13 0 0 0 11.2 0l.5.3-1.9.9 1.2 1.6a17 17 0 0 0 5-2.5c.5-4.4-.8-8.2-2.9-11.5ZM8.7 14.6c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Zm6.6 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Z"/>
+              </svg>
+              Join Arkuzo on Discord
+            </a>
+
+            <!-- Copy Invite Link with Immediate Feedback -->
+            <button class="button compact copy-invite-btn" id="copy-invite-btn" type="button" aria-label="Copy official Discord invite link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span>Copy Invite</span>
+            </button>
+          </div>
+
+          <small class="discord-subtext">Free to join · Players, creators, and developers welcome</small>
+        </div>
+
+        <!-- Interactive Discord Server Interface Preview -->
         <div class="discord-interface reveal">
-          <div class="discord-bar"><img src="assets/logo.svg?v=4" alt=""><span>ARKUZO</span><i></i></div>
-          <div class="discord-channels"><small>COMMUNITY SPACES</small><span class="active"># welcome</span><span># squad-finder</span><span># clips-highlights</span><span># tech-corner</span></div>
-          <div class="discord-voice"><div><i></i><span><b>Voice Lounge</b><small>Conversation in progress</small></span></div><div class="voice-bars"><i></i><i></i><i></i><i></i><i></i></div></div>
+          <div class="discord-bar">
+            <img src="assets/logo.svg?v=5" alt="">
+            <span>ARKUZO NETWORK</span>
+            <span class="discord-online-dot" title="Server online"></span>
+          </div>
+
+          <div class="discord-channels">
+            <small>COMMUNITY CHANNELS</small>
+            <span class="active"># welcome</span>
+            <span># squad-finder</span>
+            <span># gaming-lounge</span>
+            <span># clips-highlights</span>
+            <span># tech-corner</span>
+            <span># project-briefs</span>
+          </div>
+
+          <div class="discord-voice">
+            <div>
+              <i></i>
+              <span>
+                <b>Voice Lounge (Lobby A)</b>
+                <small>Drop in anytime</small>
+              </span>
+            </div>
+            <div class="voice-bars" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+
+          <div class="discord-footer-tip">
+            <span>Invite: <b>discord.gg/arkuzo</b></span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="technology section" id="technology" data-section>
-      <div class="wrap tech-head reveal"><span class="kicker">Arkuzo / Technical capability</span><h2>More than a<br><em>gaming community.</em></h2><p>Arkuzo also turns technical challenges into modern, maintainable digital solutions—built with the same collaborative mindset as the community.</p></div>
+    <!-- Transition Line: Discord -> Technology -->
+    <div class="section-bridge" aria-hidden="true">
+      <div class="bridge-line"></div>
+      <div class="bridge-beacon alt"></div>
+    </div>
+
+    <!-- TECHNOLOGY & CODING SECTION -->
+    <section class="technology section" id="technology" data-section aria-labelledby="tech-title">
+      <div class="wrap tech-head reveal">
+        <span class="kicker">Secondary Capability / Digital Engineering</span>
+        <h2 id="tech-title">Rooted in gaming.<br><em>Engineered with precision.</em></h2>
+        <p>
+          Gaming is our primary heartbeat, but Arkuzo is also driven by developers, creators, and engineers. We apply the same squad coordination and focus to digital builds—creating modern websites, community tools, Discord bots, automations, and custom interactive experiences.
+        </p>
+      </div>
+
       <div class="wrap tech-grid">
+        <!-- Interactive Terminal Simulator -->
         <div class="terminal reveal" data-terminal>
-          <div class="terminal-head"><span><i></i><i></i><i></i></span><b>arkuzo://solution-builder</b></div>
-          <div class="terminal-screen"><p><span>$</span> <b data-command></b><i class="terminal-caret"></i></p><p class="terminal-line l1">→ resolving architecture</p><p class="terminal-line l2">→ activating modules</p><p class="terminal-line success">✓ solution ready for collaboration</p></div>
-          <div class="module-map" aria-hidden="true"><svg viewBox="0 0 600 270"><path d="M300 135 95 55M300 135 505 55M300 135 95 220M300 135 505 220"/></svg><span class="module core">AZ</span><span class="module m1">WEB</span><span class="module m2">AI</span><span class="module m3">BOTS</span><span class="module m4">TOOLS</span></div>
+          <div class="terminal-head">
+            <span><i></i><i></i><i></i></span>
+            <b>arkuzo://solution-builder</b>
+          </div>
+          <div class="terminal-screen">
+            <p><span>$</span> <b data-command></b><i class="terminal-caret"></i></p>
+            <p class="terminal-line l1">→ resolving stack: node, react, python, cloud</p>
+            <p class="terminal-line l2">→ compiling architecture modules</p>
+            <p class="terminal-line success">✓ stack initialized for collaborative build</p>
+          </div>
+          <div class="module-map" aria-hidden="true">
+            <svg viewBox="0 0 600 270">
+              <path d="M300 135 95 55M300 135 505 55M300 135 95 220M300 135 505 220"/>
+            </svg>
+            <span class="module core">AZ</span>
+            <span class="module m1">WEB APPS</span>
+            <span class="module m2">DISCORD TOOLS</span>
+            <span class="module m3">AUTOMATION</span>
+            <span class="module m4">PROTOTYPES</span>
+          </div>
         </div>
-        <div class="capability-list reveal"><span>CAPABILITIES / 06</span><ul><li><i>01</i><b>Websites &amp; web applications</b></li><li><i>02</i><b>Custom software</b></li><li><i>03</i><b>AI integrations</b></li><li><i>04</i><b>Automation</b></li><li><i>05</i><b>Bots &amp; plugins</b></li><li><i>06</i><b>Debugging &amp; optimization</b></li></ul><a class="arrow-link" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">Build with Arkuzo <span>↗</span></a></div>
+
+        <!-- Capability List -->
+        <div class="capability-list reveal">
+          <div class="cap-header">
+            <span>CAPABILITIES / 07</span>
+            <span class="cap-status">DEVELOPMENT READY</span>
+          </div>
+          <ul>
+            <li><i>01</i><b>Websites &amp; web applications</b></li>
+            <li><i>02</i><b>Community tools &amp; dashboards</b></li>
+            <li><i>03</i><b>Discord integrations &amp; custom bots</b></li>
+            <li><i>04</i><b>Workflow automation &amp; services</b></li>
+            <li><i>05</i><b>Interactive web experiences</b></li>
+            <li><i>06</i><b>Rapid prototypes &amp; MVPs</b></li>
+            <li><i>07</i><b>Technical problem-solving &amp; architecture</b></li>
+          </ul>
+          <a class="button primary compact" href="#brief-builder">
+            Launch Brief Builder <span>↓</span>
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="faq section" id="faq" data-section>
+    <!-- NEW SECTION: PROJECT BRIEF BUILDER (Requirement 7) -->
+    <section class="brief-section section" id="brief-builder" data-section aria-labelledby="brief-title">
+      <div class="wrap">
+        <header class="section-intro reveal">
+          <div>
+            <span class="kicker">Build with Arkuzo</span>
+            <h2 id="brief-title">Create your<br><em>project brief.</em></h2>
+          </div>
+          <p>
+            Planning a custom website, community bot, automation tool, or interactive experience? Configure your specifications below to generate a concise project brief ready to share in our Discord.
+          </p>
+        </header>
+
+        <div class="brief-builder-container reveal">
+          <!-- Left: Interactive Form Controls -->
+          <div class="brief-form" role="form" aria-label="Project Brief Generator">
+            <!-- 1. Project Type Selection -->
+            <div class="brief-group">
+              <span class="group-label" id="label-brief-type">1. PROJECT TYPE</span>
+              <div class="pill-selector" id="brief-types" role="radiogroup" aria-labelledby="label-brief-type">
+                <button type="button" class="brief-pill active" data-type="Website" role="radio" aria-checked="true" tabindex="0">Website</button>
+                <button type="button" class="brief-pill" data-type="Discord or community tool" role="radio" aria-checked="false" tabindex="-1">Discord or community tool</button>
+                <button type="button" class="brief-pill" data-type="Automation" role="radio" aria-checked="false" tabindex="-1">Automation</button>
+                <button type="button" class="brief-pill" data-type="Interactive experience" role="radio" aria-checked="false" tabindex="-1">Interactive experience</button>
+                <button type="button" class="brief-pill" data-type="Prototype" role="radio" aria-checked="false" tabindex="-1">Prototype</button>
+                <button type="button" class="brief-pill" data-type="Other technical project" role="radio" aria-checked="false" tabindex="-1">Other technical project</button>
+              </div>
+            </div>
+
+            <!-- 2. Priorities Selection -->
+            <div class="brief-group">
+              <span class="group-label" id="label-brief-priority">2. MAIN PRIORITY</span>
+              <div class="pill-selector" id="brief-priorities" role="radiogroup" aria-labelledby="label-brief-priority">
+                <button type="button" class="brief-pill priority-pill active" data-priority="High performance &amp; speed" role="radio" aria-checked="true" tabindex="0">High performance &amp; speed</button>
+                <button type="button" class="brief-pill priority-pill" data-priority="Modern aesthetic design" role="radio" aria-checked="false" tabindex="-1">Modern aesthetic design</button>
+                <button type="button" class="brief-pill priority-pill" data-priority="Seamless Discord integration" role="radio" aria-checked="false" tabindex="-1">Seamless Discord integration</button>
+                <button type="button" class="brief-pill priority-pill" data-priority="Scalability &amp; clean code" role="radio" aria-checked="false" tabindex="-1">Scalability &amp; clean code</button>
+                <button type="button" class="brief-pill priority-pill" data-priority="Rapid turnaround" role="radio" aria-checked="false" tabindex="-1">Rapid turnaround</button>
+              </div>
+            </div>
+
+            <!-- 3. Project Stage Selection -->
+            <div class="brief-group">
+              <span class="group-label" id="label-brief-stage">3. CURRENT STAGE</span>
+              <div class="pill-selector" id="brief-stages" role="radiogroup" aria-labelledby="label-brief-stage">
+                <button type="button" class="brief-pill stage-pill active" data-stage="Concept &amp; planning" role="radio" aria-checked="true" tabindex="0">Concept &amp; planning</button>
+                <button type="button" class="brief-pill stage-pill" data-stage="Scoped &amp; ready" role="radio" aria-checked="false" tabindex="-1">Scoped &amp; ready</button>
+                <button type="button" class="brief-pill stage-pill" data-stage="Prototype in progress" role="radio" aria-checked="false" tabindex="-1">Prototype in progress</button>
+                <button type="button" class="brief-pill stage-pill" data-stage="Needs refactor or repair" role="radio" aria-checked="false" tabindex="-1">Needs refactor or repair</button>
+                <button type="button" class="brief-pill stage-pill" data-stage="Expanding existing system" role="radio" aria-checked="false" tabindex="-1">Expanding existing system</button>
+              </div>
+            </div>
+
+            <!-- 4. Desired Outcome Selection -->
+            <div class="brief-group">
+              <span class="group-label" id="label-brief-outcome">4. DESIRED OUTCOME</span>
+              <div class="pill-selector" id="brief-outcomes" role="radiogroup" aria-labelledby="label-brief-outcome">
+                <button type="button" class="brief-pill outcome-pill active" data-outcome="Community growth &amp; engagement" role="radio" aria-checked="true" tabindex="0">Community growth &amp; engagement</button>
+                <button type="button" class="brief-pill outcome-pill" data-outcome="Automated operations" role="radio" aria-checked="false" tabindex="-1">Automated operations</button>
+                <button type="button" class="brief-pill outcome-pill" data-outcome="Public web presence" role="radio" aria-checked="false" tabindex="-1">Public web presence</button>
+                <button type="button" class="brief-pill outcome-pill" data-outcome="Tournament &amp; squad management" role="radio" aria-checked="false" tabindex="-1">Tournament &amp; squad management</button>
+                <button type="button" class="brief-pill outcome-pill" data-outcome="Custom developer utility" role="radio" aria-checked="false" tabindex="-1">Custom developer utility</button>
+              </div>
+            </div>
+
+            <!-- 5. Additional Details -->
+            <div class="brief-group">
+              <div class="group-label-row">
+                <label class="group-label" for="brief-notes">5. OPTIONAL ADDITIONAL DETAILS</label>
+                <span class="char-count" id="brief-char-count" aria-live="polite">0 / 240</span>
+              </div>
+              <textarea id="brief-notes" class="brief-textarea" placeholder="Specific goals, stack preferences, reference links, or target timeline..." maxlength="240" rows="3"></textarea>
+            </div>
+          </div>
+
+          <!-- Right: Generated Live Brief & Actions -->
+          <div class="brief-preview-card">
+            <div class="preview-header">
+              <div class="preview-title">
+                <img src="assets/logo.svg?v=5" alt="" aria-hidden="true">
+                <span>GENERATED BRIEF</span>
+              </div>
+              <span class="preview-badge" title="No data is transmitted across the network">CLIENT-SIDE ONLY</span>
+            </div>
+
+            <pre class="brief-output" id="brief-output" aria-live="polite" aria-atomic="true">========================================
+ARKUZO PROJECT BRIEF
+========================================
+Project Type:     Website
+Main Priority:    High performance & speed
+Current Stage:    Concept & planning
+Desired Outcome:  Community growth & engagement
+Additional Notes: None provided
+----------------------------------------
+Destination:      #tech-corner / #project-briefs
+Community:        discord.gg/arkuzo
+Status:           Client-side brief ready for review
+========================================</pre>
+
+            <div class="brief-actions">
+              <button class="button primary" id="copy-brief-btn" type="button" aria-label="Copy generated brief to clipboard">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                <span>Copy Brief</span>
+              </button>
+
+              <button class="button" id="reset-brief-btn" type="button" aria-label="Reset brief selections to defaults">
+                Reset
+              </button>
+
+              <a class="button compact" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">
+                Open Discord <span>↗</span>
+              </a>
+            </div>
+
+            <p class="brief-disclaimer">
+              <strong>Client-Side Only:</strong> All selections remain exclusively in your browser and are not transmitted. Copy your generated brief and paste it into our <strong>#tech-corner</strong> or <strong>#project-briefs</strong> channel on Discord.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Transition Line: Brief -> FAQ -->
+    <div class="section-bridge" aria-hidden="true">
+      <div class="bridge-line"></div>
+      <div class="bridge-beacon"></div>
+    </div>
+
+    <!-- FAQ SECTION -->
+    <section class="faq section" id="faq" data-section aria-labelledby="faq-title">
       <div class="wrap faq-grid">
-        <header class="faq-head reveal"><span class="kicker">Clear answers</span><h2>Before you<br><em>join the lobby.</em></h2><p>What to know about the Arkuzo community and its technical side.</p></header>
+        <header class="faq-head reveal">
+          <span class="kicker">Clear answers</span>
+          <h2 id="faq-title">Before you<br><em>join the lobby.</em></h2>
+          <p>Everything you need to know about the Arkuzo gaming community, Discord channels, and our technical side.</p>
+        </header>
+
         <div class="accordion reveal">
-          <div class="faq-item"><h3><button aria-expanded="false" aria-controls="a1">What is Arkuzo?<span></span></button></h3><div class="answer" id="a1"><div><p>Arkuzo is a gaming community hub where people meet, play, talk, share creative work, and connect around technology.</p></div></div></div>
-          <div class="faq-item"><h3><button aria-expanded="false" aria-controls="a2">What happens in the community?<span></span></button></h3><div class="answer" id="a2"><div><p>People find squads, join voice conversations, share clips and projects, discover games, and exchange ideas.</p></div></div></div>
-          <div class="faq-item"><h3><button aria-expanded="false" aria-controls="a3">Which kinds of players can join?<span></span></button></h3><div class="answer" id="a3"><div><p>Casual players, competitive players, creators, developers, and anyone looking for a welcoming community.</p></div></div></div>
-          <div class="faq-item"><h3><button aria-expanded="false" aria-controls="a4">Is joining the Discord free?<span></span></button></h3><div class="answer" id="a4"><div><p>Yes. Joining the Arkuzo Discord community is free.</p></div></div></div>
-          <div class="faq-item"><h3><button aria-expanded="false" aria-controls="a5">Does Arkuzo offer coding solutions?<span></span></button></h3><div class="answer" id="a5"><div><p>Yes. Arkuzo supports websites, software, AI integrations, automation, bots, plugins, debugging, and optimization.</p></div></div></div>
-          <div class="faq-item"><h3><button aria-expanded="false" aria-controls="a6">How do I discuss a project or join?<span></span></button></h3><div class="answer" id="a6"><div><p>Use any Discord button on this page to enter the official Arkuzo community and start a conversation.</p></div></div></div>
+          <div class="faq-item">
+            <h3>
+              <button aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+                What is Arkuzo?
+                <span></span>
+              </button>
+            </h3>
+            <div class="answer" id="faq-a1" role="region" aria-labelledby="faq-q1">
+              <div>
+                <p>Arkuzo is a premium gaming community and digital collective where players meet, queue for games, chat in active voice lounges, share clips, and collaborate on technology projects.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+                What happens inside the community?
+                <span></span>
+              </button>
+            </h3>
+            <div class="answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
+              <div>
+                <p>Members organize casual and competitive sessions, drop into voice channels, share highlights, participate in community game nights, exchange coding ideas, and collaborate on bots and digital tools.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+                Which players and creators can join?
+                <span></span>
+              </button>
+            </h3>
+            <div class="answer" id="faq-a3" role="region" aria-labelledby="faq-q3">
+              <div>
+                <p>Everyone is welcome. Whether you are a casual player looking for chill sessions, a competitive player seeking a reliable squad, a content creator, or a developer, you will find people with matching goals.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+                Is joining the Arkuzo Discord free?
+                <span></span>
+              </button>
+            </h3>
+            <div class="answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
+              <div>
+                <p>Yes. Joining the official Arkuzo Discord community is 100% free and open. Simply click any Discord link on this site to receive an instant invite.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+                What coding and technical solutions does Arkuzo support?
+                <span></span>
+              </button>
+            </h3>
+            <div class="answer" id="faq-a5" role="region" aria-labelledby="faq-q5">
+              <div>
+                <p>Arkuzo supports modern web development, custom software dashboards, AI integrations, Discord bots, automation scripts, and performance optimization. Use the Project Brief Builder above to outline what you need.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
+                How do I start a conversation or propose a project?
+                <span></span>
+              </button>
+            </h3>
+            <div class="answer" id="faq-a6" role="region" aria-labelledby="faq-q6">
+              <div>
+                <p>Click any Join Discord button, navigate to the <strong>#tech-corner</strong> or <strong>#project-briefs</strong> channel, and drop your thoughts or generated brief to connect with the team.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="final section" aria-labelledby="final-title"><canvas class="final-canvas" data-final-canvas aria-hidden="true"></canvas><div class="final-rings" aria-hidden="true"><i></i><i></i><i></i></div><div class="wrap reveal"><img src="assets/logo.svg?v=4" alt=""><span class="kicker">Ready when you are</span><h2 id="final-title">The lobby is open.</h2><p>The next game, conversation, and idea starts with the people you meet inside.</p><a class="button primary large magnetic" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">Join the Arkuzo Discord <span>↗</span></a></div></section>
+    <!-- FINAL CTA SECTION -->
+    <section class="final section" aria-labelledby="final-title">
+      <canvas class="final-canvas" data-final-canvas aria-hidden="true"></canvas>
+      <div class="final-rings" aria-hidden="true">
+        <i></i><i></i><i></i>
+      </div>
+      <div class="wrap reveal">
+        <img src="assets/logo.svg?v=5" alt="Arkuzo AZ Emblem">
+        <span class="kicker">Ready when you are</span>
+        <h2 id="final-title">The lobby is open.</h2>
+        <p>The next game, conversation, and project starts with the people you connect with inside.</p>
+        <div class="final-cta-row">
+          <a class="button primary large magnetic" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19.5 5.3A17 17 0 0 0 15.4 4l-.5 1.1a15 15 0 0 0-5.8 0L8.6 4a17 17 0 0 0-4.1 1.3C1.9 9.2 1.2 13 1.6 16.8a17 17 0 0 0 5 2.5l1.2-1.6-1.8-.9.4-.3a13 13 0 0 0 11.2 0l.5.3-1.9.9 1.2 1.6a17 17 0 0 0 5-2.5c.5-4.4-.8-8.2-2.9-11.5ZM8.7 14.6c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Zm6.6 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.1 1.1 2.1 2.4-.9 2.4-2.1 2.4Z"/>
+            </svg>
+            Join the Arkuzo Discord <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer"><div class="wrap footer-main"><div><img src="assets/banner.svg?v=4" alt="Arkuzo"><p>A gaming community where players, creators, and technology come together.</p></div><nav aria-label="Footer navigation"><a href="#community">Community</a><a href="#gaming">Gaming</a><a href="#technology">Coding</a><a href="#faq">FAQ</a></nav><a class="arrow-link" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">Join Discord <span>↗</span></a></div><div class="wrap footer-bottom"><span>© <b data-year>2026</b> Arkuzo</span><span>PLAY · CONNECT · CREATE</span></div></footer>
-  <script src="script.js"></script>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap footer-main">
+      <div class="footer-brand-col">
+        <a href="#home" aria-label="Arkuzo home">
+          <img src="assets/banner.svg?v=5" alt="Arkuzo">
+        </a>
+        <p>A gaming community where players, creators, and technology come together.</p>
+      </div>
+      
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <div class="footer-nav-col">
+          <span class="footer-heading">COMMUNITY</span>
+          <a href="#community">Live Space</a>
+          <a href="#path">Choose Path</a>
+          <a href="#story">Our Story</a>
+          <a href="#gaming">Gaming Modes</a>
+        </div>
+        <div class="footer-nav-col">
+          <span class="footer-heading">TECHNOLOGY</span>
+          <a href="#technology">Coding Stack</a>
+          <a href="#brief-builder">Brief Builder</a>
+          <a href="#faq">FAQ</a>
+          <a href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">Discord Gateway ↗</a>
+        </div>
+        <div class="footer-nav-col">
+          <span class="footer-heading">LEGAL</span>
+          <a href="impressum.html">Impressum</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+      </nav>
+
+      <div class="footer-actions-col">
+        <a class="button primary compact" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">
+          Enter Discord <span>↗</span>
+        </a>
+        <button class="scroll-top-btn" id="scroll-top-btn" type="button" aria-label="Scroll back to top of page">
+          <span>Back to top</span> <i>↑</i>
+        </button>
+      </div>
+    </div>
+
+    <div class="wrap footer-bottom">
+      <span>© <b data-year>2026</b> Arkuzo. All rights reserved.</span>
+      <span class="footer-tagline">PLAY · CONNECT · CREATE</span>
+    </div>
+  </footer>
+
+  <script src="script.js?v=5" defer></script>
 </body>
 </html>
