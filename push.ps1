@@ -25,10 +25,10 @@ if (-not $username -or $username.Trim() -eq "") {
     exit 1
 }
 
-$remoteUrl = "https://$token@github.com/$username/$repo.git"
+$remoteUrl = "https://x-access-token:$token@github.com/$username/$repo.git"
 git remote remove origin 2>$null
 git remote add origin $remoteUrl
-git push -u origin main
+git -c credential.helper= push -u origin main
 
 # Remove token from git remote config to keep it secure
 git remote set-url origin "https://github.com/$username/$repo.git"
