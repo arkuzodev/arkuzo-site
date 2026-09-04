@@ -1204,14 +1204,21 @@ svg{display:block}
   transition:transform var(--dur-fast) var(--ease);
 }
 .faq-item button span::after{transform:rotate(90deg)}
+.faq-item.open button span::after,
 .faq-item button[aria-expanded=true] span::after{transform:rotate(0)}
 .answer{
   display:grid;
   grid-template-rows:0fr;
-  transition:grid-template-rows var(--dur-mid) var(--ease);
+  transition:grid-template-rows 0.35s var(--ease);
 }
-.answer>*{overflow:hidden}
-.faq-item button[aria-expanded=true]+.answer{grid-template-rows:1fr}
+.answer>div{
+  overflow:hidden;
+  min-height:0;
+}
+.faq-item.open .answer,
+.faq-item:has(button[aria-expanded=true]) .answer{
+  grid-template-rows:1fr;
+}
 .answer p{
   color:var(--muted);
   font-size:0.96rem;

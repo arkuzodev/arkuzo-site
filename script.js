@@ -376,11 +376,22 @@
   const faqItems = Array.from(doc.querySelectorAll('.faq-item'));
   const faqButtons = faqItems.map((item) => item.querySelector('button')).filter(Boolean);
 
-  faqButtons.forEach((btn, index) => {
+  faqItems.forEach((item, index) => {
+    const btn = item.querySelector('button');
+    if (!btn) return;
+
     btn.addEventListener('click', () => {
-      const isOpen = btn.getAttribute('aria-expanded') === 'true';
-      faqButtons.forEach((b) => b.setAttribute('aria-expanded', 'false'));
-      if (!isOpen) btn.setAttribute('aria-expanded', 'true');
+      const isAlreadyOpen = item.classList.contains('open');
+      faqItems.forEach((other) => {
+        other.classList.remove('open');
+        const otherBtn = other.querySelector('button');
+        if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isAlreadyOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
     });
 
     btn.addEventListener('keydown', (e) => {
