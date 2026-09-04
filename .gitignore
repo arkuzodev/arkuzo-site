@@ -1,5 +1,6 @@
 .env
 .env.local
+push.ps1
 node_modules/
 .DS_Store
 Thumbs.db
