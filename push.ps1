@@ -1,6 +1,6 @@
 # Load .env variables safely
 if (-not (Test-Path ".env")) {
-    Write-Error ".env file not found. Please create .env with GITHUB_TOKEN and GITHUB_USERNAME."
+    Write-Error ".env file not found."
     exit 1
 }
 
@@ -16,20 +16,30 @@ $repo = [Environment]::GetEnvironmentVariable("GITHUB_REPO", "Process")
 if (-not $repo) { $repo = "arkuzo-site" }
 
 if (-not $token -or $token.Trim() -eq "") {
-    Write-Error "GITHUB_TOKEN is missing in .env. Please fill in your GitHub token."
+    Write-Error "GITHUB_TOKEN is missing in .env."
     exit 1
 }
 
 if (-not $username -or $username.Trim() -eq "") {
-    Write-Error "GITHUB_USERNAME is missing in .env. Please fill in your GitHub username."
+    Write-Error "GITHUB_USERNAME is missing in .env."
     exit 1
 }
 
-$remoteUrl = "https://x-access-token:$token@github.com/$username/$repo.git"
+if ($token.StartsWith("github_pat_")) {
+    $remoteUrl = "https://x-access-token:$token@github.com/$username/$repo.git"
+} else {
+    $remoteUrl = "https://$username:$token@github.com/$username/$repo.git"
+}
+
 git remote remove origin 2>$null
 git remote add origin $remoteUrl
 git -c credential.helper= push -u origin main
 
-# Remove token from git remote config to keep it secure
-git remote set-url origin "https://github.com/$username/$repo.git"
-Write-Host "Successfully pushed to https://github.com/$username/$repo"
+if ($LASTEXITCODE -eq 0) {
+    # Strip credentials from remote URL
+    git remote set-url origin "https://github.com/$username/$repo.git"
+    Write-Host "Successfully pushed to https://github.com/$username/$repo"
+} else {
+    git remote set-url origin "https://github.com/$username/$repo.git"
+    Write-Error "Push failed. Please check token permissions."
+}
