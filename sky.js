@@ -1,4 +1,5 @@
-/* arkuzo sky: a still starfield (tints borrowed from Arkuzo Galaxy) crossed by small white meteors. */
+/* arkuzo sky: a still starfield (tints borrowed from Arkuzo Galaxy) crossed by small white meteors.
+   On the home page the black hole (hole.js) takes over the stars; this canvas then draws only the meteors, behind the hole. */
 (function () {
   'use strict';
 
@@ -101,7 +102,9 @@
     px += (tx - px) * 0.04;
     py += (ty - py) * 0.04;
 
-    for (var i = 0; i < stars.length; i++) {
+    // with the black hole running (hole.js), it draws the stars itself so it can bend them; this canvas keeps the meteors
+    var hole = window.__arkHole && window.__arkHole.on;
+    for (var i = 0; !hole && i < stars.length; i++) {
       var s = stars[i];
       var a = s.a;
       if (s.tw && dt) a *= 1 - s.tw + s.tw * (0.5 + 0.5 * Math.sin(clock * s.f + s.p));
@@ -153,7 +156,9 @@
     last = now;
     clock += dt;
 
-    if (now >= nextMeteor) {
+    var held = window.__arkHole && window.__arkHole.on && !window.__arkHole.meteors;   // no meteors during the intro
+    if (held) nextMeteor = now + 600;
+    else if (now >= nextMeteor) {
       spawn();
       if (!calm && Math.random() < 0.12) spawn();       // the odd pair
       nextMeteor = now + (calm ? rand(5000, 11000) : rand(900, 2600));

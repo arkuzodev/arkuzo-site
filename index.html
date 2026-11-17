@@ -25,10 +25,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&display=swap">
-  <link rel="stylesheet" href="styles.css?v=1">
+  <link rel="stylesheet" href="styles.css?v=3">
+  <script>
+    // cinematic intro: only with motion allowed and WebGL around; the content shows after 7 s at the latest, whatever happens
+    (function (d) {
+      try {
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches && window.WebGLRenderingContext) {
+          d.classList.add('js-intro');
+          setTimeout(function () { d.classList.add('arrived'); }, 7000);
+        }
+      } catch (e) { /* no intro */ }
+    })(document.documentElement);
+  </script>
 </head>
 <body class="home">
   <canvas class="sky" aria-hidden="true"></canvas>
+  <canvas class="hole" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="bars" aria-hidden="true"></div>
 
   <main class="hero">
     <img class="mark" src="assets/mark.png" width="152" height="159" alt="">
@@ -49,6 +63,7 @@
     </nav>
   </footer>
 
-  <script src="sky.js?v=1" defer></script>
+  <script src="hole.js?v=8" defer></script>
+  <script src="sky.js?v=3" defer></script>
 </body>
 </html>
