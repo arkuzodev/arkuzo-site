@@ -190,6 +190,9 @@ body.home::before {
 }
 
 /* hole.js draws the wordmark itself, bent by the hole; the text stays here for screen readers, search and selection */
+/* the mark now lives inside the hole (hole.js); the small one above the wordmark stays only as the fallback */
+html.mark-in-hole .above { display: none; }
+
 html.lensed .wordmark { color: transparent; background: none; -webkit-text-fill-color: transparent; }
 html.lensed.js-intro .wordmark, html.lensed.js-intro.arrived .wordmark { opacity: 1; filter: none; letter-spacing: .04em; transition: none; }
 

@@ -25,7 +25,7 @@
     'precision highp float;',
     'uniform vec2 uCss; uniform float uScale; uniform vec2 uCtr; uniform float uRs; uniform float uTime; uniform float uRoll;',
     'uniform float uIncl; uniform float uExpo; uniform float uInten; uniform float uQ; uniform float uWarp; uniform vec2 uPar; uniform float uStars;',
-    'uniform sampler2D uTex; uniform sampler2D uGlow; uniform vec4 uTx; uniform vec2 uTxB; uniform float uTxA; uniform float uTxW;',
+    'uniform sampler2D uTex; uniform sampler2D uGlow; uniform sampler2D uLogo; uniform float uLogoA; uniform vec4 uLogoR; uniform vec4 uTx; uniform vec2 uTxB; uniform float uTxA; uniform float uTxW;',
     'const vec3 HOT = vec3(1.0, 0.95, 0.86); const vec3 WARM = vec3(1.0, 0.54, 0.24);',
     'float h2(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }',
     'float n2(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f); return mix(mix(h2(i), h2(i+vec2(1.0,0.0)), f.x), mix(h2(i+vec2(0.0,1.0)), h2(i+vec2(1.0,1.0)), f.x), f.y); }',
@@ -123,6 +123,34 @@
     '  float a = clamp(max(1.0 - outside, max(col.r, max(col.g, col.b))), 0.0, 1.0);',
     // --- the wordmark, caught by the hole: stretched towards the ring and squeezed across it near the ends (like
     // spaghettification), bowed along the ring, a shimmer of warped space and colour fringes; the middle stays clean
+    // --- the Arkuzo mark deep inside the shadow, behind the wordmark: barely there, beating with the ring, seen
+    // through static like a dying broadcast, with scanlines, a rolling bar and now and then a glitch that tears it apart
+    '  if (uLogoA > 0.001 && r < 1.0) {',
+    '    float tt = uTime, inner = 1.0 - smoothstep(0.5, 0.97, r);',
+    '    float gb = step(0.9, h2(vec2(floor(tt * 6.0), 7.3))) * step(0.5, h2(vec2(floor(tt * 23.0), 1.9)));',
+    '    float band = floor((p.y + 3.0) * 30.0);',
+    '    vec2 lp = p;',
+    '    lp.x += (h2(vec2(band, floor(tt * 30.0))) - 0.5) * 0.12 * gb;',
+    '    lp.x += sin(p.y * 40.0 + tt * 3.0) * 0.0025;',
+    '    lp = (lp - uLogoR.xy) / (1.0 + 0.015 * sin(tt * 0.9));',
+    '    vec2 luv = vec2(lp.x / uLogoR.z + 0.5, 0.5 - lp.y / uLogoR.w);',
+    '    float ca = 0.004 + 0.035 * gb;',
+    '    vec3 lg = vec3(0.0);',
+    '    if (luv.x > -0.05 && luv.x < 1.05 && luv.y > 0.0 && luv.y < 1.0) {',
+    '      lg = vec3(texture2D(uLogo, luv + vec2(ca, 0.0)).a, texture2D(uLogo, luv).a, texture2D(uLogo, luv - vec2(ca, 0.0)).a);',
+    '    }',
+    '    vec2 px = floor(gl_FragCoord.xy / max(uScale, 1.0) / 1.5);',
+    '    float st = h2(px + fract(tt * 17.31) * 113.0);',
+    '    float sl = 0.72 + 0.28 * sin(css.y * 2.2);',
+    '    float roll = 0.75 + 0.25 * smoothstep(0.0, 0.1, fract(-p.y * 0.35 - tt * 0.11)) * (1.0 - smoothstep(0.1, 0.2, fract(-p.y * 0.35 - tt * 0.11)));',
+    '    float pulse = 0.55 + 0.6 * pow(0.5 + 0.5 * sin(tt * 0.9), 6.0);',
+    '    float fade = smoothstep(-0.75, 0.35, lp.y) * inner;',
+    '    vec3 mk = lg * mix(0.2, 1.0, st) * sl * roll * pulse * fade * 0.3;',
+    '    mk *= vec3(1.0, 0.8, 0.74) * (1.0 + gb * 0.9);',
+    '    col += mk * uLogoA;',
+    // a faint snow over the whole void, so the black is never quite still
+    '    col += vec3(st * st) * 0.022 * inner * uLogoA;',
+    '  }',
     '  if (uTxA > 0.001 && abs(p.x) < uTxB.x && abs(p.y) < uTxB.y) {',
     '    float rr = length(p), w = uTxW, ax = abs(p.x);',
     '    vec2 src = p * (1.0 - 0.22 * w * pow(min(rr, 1.3), 4.0));',
@@ -162,7 +190,7 @@
     var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
     var aLoc = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(aLoc); gl.vertexAttribPointer(aLoc, 2, gl.FLOAT, false, 0, 0);
-    ['uCss', 'uScale', 'uCtr', 'uRs', 'uTime', 'uRoll', 'uIncl', 'uExpo', 'uInten', 'uQ', 'uWarp', 'uPar', 'uStars', 'uTex', 'uGlow', 'uTx', 'uTxB', 'uTxA', 'uTxW'].forEach(function (n) { U[n] = gl.getUniformLocation(prog, n); });
+    ['uCss', 'uScale', 'uCtr', 'uRs', 'uTime', 'uRoll', 'uIncl', 'uExpo', 'uInten', 'uQ', 'uWarp', 'uPar', 'uStars', 'uTex', 'uGlow', 'uLogo', 'uLogoA', 'uLogoR', 'uTx', 'uTxB', 'uTxA', 'uTxW'].forEach(function (n) { U[n] = gl.getUniformLocation(prog, n); });
     tex = gl.createTexture(); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -172,8 +200,29 @@
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(4));
-    gl.uniform1i(U.uGlow, 1); gl.activeTexture(gl.TEXTURE0);
+    gl.uniform1i(U.uGlow, 1);
+    logoTex = gl.createTexture(); gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, logoTex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(4));
+    gl.uniform1i(U.uLogo, 2); gl.activeTexture(gl.TEXTURE0);
+    logoOk = false; loadLogo();
     txOk = false;
+  }
+  // the mark for the inside of the hole (same file as the small logo above the wordmark)
+  var logoTex = null, logoOk = false, logoImg = null, logoAspect = 304 / 318;
+  function loadLogo() {
+    var put = function () {
+      gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, logoTex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, logoImg);
+      gl.activeTexture(gl.TEXTURE0);
+      logoAspect = logoImg.naturalWidth / Math.max(1, logoImg.naturalHeight);
+      logoOk = true; root.classList.add('mark-in-hole');
+    };
+    if (logoImg && logoImg.complete && logoImg.naturalWidth) { put(); return; }
+    var mk = document.querySelector('.mark');
+    logoImg = new Image(); logoImg.onload = put;
+    logoImg.src = mk ? mk.getAttribute('src') : 'assets/mark.png';
   }
   var tex = null, glowTex = null, txOk = false, txRect = [0, 0, 1, 1], txB = [0, 0];
   try { setup(); } catch (e) {
@@ -259,10 +308,10 @@
   }, { passive: true });
 
   // ---------- frame ----------
-  var raf = 0, last = 0, time = 0, frames = 0, slow = 0, tuned = false, txA = 1, txW = 1, txWarpX = 0;
+  var raf = 0, last = 0, time = 0, frames = 0, slow = 0, tuned = false, txA = 1, txW = 1, txWarpX = 0, logoA = 1;
   function render(dt) {
     var rs = rsRest, roll = 0, warp = 0, expo = 1, inten = 1;
-    txA = 1; txW = 1 + 0.08 * Math.sin(time * 0.45); txWarpX = 0;
+    txA = 1; txW = 1 + 0.08 * Math.sin(time * 0.45); txWarpX = 0; logoA = 1;
     px += (mx - px) * 0.05; py += (my - py) * 0.05;
     if (intro) {
       intro.t += dt * intro.rate;
@@ -277,6 +326,8 @@
       // the wordmark condenses out of the warped space as the camera settles
       var k = Math.min(1, Math.max(0, (u - 0.45) / 0.45)); k = k * k * (3 - 2 * k);
       txA = k; txW = 1 + 5 * (1 - k) * (1 - k); txWarpX = 1.5 * (1 - k);
+      // the mark flickers on a moment before the wordmark, like a signal finding its channel
+      var lk = Math.min(1, Math.max(0, (u - 0.3) / 0.4)); logoA = lk * (lk < 1 ? 0.55 + 0.45 * (Math.sin(time * 37) > 0 ? 1 : 0) : 1);
       if (!intro.shown && u > 0.6) { intro.shown = true; arrive(); }
       if (u >= 1) {
         intro = null; arrive(); shared.meteors = true;
@@ -292,6 +343,7 @@
     gl.uniform1f(U.uWarp, warp); gl.uniform2f(U.uPar, -px * 18, -py * 18); gl.uniform1f(U.uStars, 1);
     gl.uniform4f(U.uTx, txRect[0] - px * 10, txRect[1] - py * 8, txRect[2], txRect[3]); gl.uniform2f(U.uTxB, txB[0] * (1 + txWarpX), txB[1] * (1 + txWarpX));
     gl.uniform1f(U.uTxA, txOk ? txA : 0); gl.uniform1f(U.uTxW, txW);
+    gl.uniform1f(U.uLogoA, logoOk ? logoA : 0); gl.uniform4f(U.uLogoR, 0.0, 0.06, 1.3 * logoAspect, 1.3);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
   function frame(now) {
