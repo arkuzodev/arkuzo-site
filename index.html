@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>arkuzo</title>
-  <meta name="description" content="arkuzo — fast and reliable. Join the community on Discord.">
+  <meta name="description" content="arkuzo. Join the community on Discord.">
   <link rel="canonical" href="https://arkuzo.lol/">
   <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark">
@@ -12,18 +12,18 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://arkuzo.lol/">
   <meta property="og:title" content="arkuzo">
-  <meta property="og:description" content="Fast and reliable. Join the community on Discord.">
+  <meta property="og:description" content="Join the arkuzo community on Discord.">
   <meta property="og:image" content="https://arkuzo.lol/assets/icon-512.png">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="arkuzo">
-  <meta name="twitter:description" content="Fast and reliable. Join the community on Discord.">
+  <meta name="twitter:description" content="Join the arkuzo community on Discord.">
   <meta name="twitter:image" content="https://arkuzo.lol/assets/icon-512.png">
 
   <link rel="icon" href="assets/icon-512.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/icon-512.png">
 
   <link rel="preload" href="assets/fonts/michroma-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
   <script>
     // cinematic intro: only with motion allowed and WebGL around; the content shows after 7 s at the latest, whatever happens
     (function (d) {
@@ -43,14 +43,17 @@
   <div class="bars" aria-hidden="true"></div>
 
   <main class="hero">
-    <img class="mark" src="assets/mark.png" width="152" height="159" alt="">
+    <!-- the wordmark sits exactly in the centre of the hole; logo above and the door below hang off it -->
+    <div class="stack">
+    <div class="above"><img class="mark" src="assets/mark.png" width="152" height="159" alt=""></div>
     <h1 class="wordmark">arkuzo</h1>
-    <p class="tagline">fast and reliable</p>
-
+    <div class="below">
     <a class="discord" href="https://discord.gg/arkuzo" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20.32 4.37A19.8 19.8 0 0 0 15.39 2.85a.07.07 0 0 0-.08.04c-.21.38-.45.87-.61 1.25a18.27 18.27 0 0 0-5.49 0 12.6 12.6 0 0 0-.62-1.25.08.08 0 0 0-.08-.04 19.74 19.74 0 0 0-4.93 1.52.07.07 0 0 0-.03.03C.53 9.05-.32 13.58.1 18.06a.08.08 0 0 0 .03.06 19.9 19.9 0 0 0 5.99 3.03.08.08 0 0 0 .08-.03c.46-.63.87-1.3 1.23-1.99a.08.08 0 0 0-.04-.11 13.1 13.1 0 0 1-1.87-.89.08.08 0 0 1-.01-.13c.13-.09.25-.19.37-.29a.07.07 0 0 1 .08-.01c3.93 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08.01c.12.1.24.2.37.29a.08.08 0 0 1-.01.13c-.6.35-1.22.65-1.87.89a.08.08 0 0 0-.04.11c.36.7.78 1.36 1.23 1.99a.08.08 0 0 0 .08.03 19.84 19.84 0 0 0 6-3.03.08.08 0 0 0 .03-.06c.5-5.18-.84-9.67-3.55-13.66a.06.06 0 0 0-.03-.03ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42 0-1.33.96-2.42 2.16-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.09-2.15-2.42 0-1.33.95-2.42 2.15-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.33-.95 2.42-2.16 2.42Z"/></svg>
       <span>Join the Discord</span>
     </a>
+    </div>
+    </div>
   </main>
 
   <footer class="foot">
@@ -61,7 +64,7 @@
     </nav>
   </footer>
 
-  <script src="hole.js?v=9" defer></script>
+  <script src="hole.js?v=10" defer></script>
   <script src="sky.js?v=3" defer></script>
 </body>
 </html>
