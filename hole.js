@@ -121,22 +121,23 @@
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { var log = gl.getShaderInfoLog(s); gl.deleteShader(s); throw new Error(log); }
     return s;
   }
-  var prog;
-  try {
-    prog = gl.createProgram();
+  var U = {};
+  // compiles the shader and uploads the triangle; runs again when the GPU context comes back (iOS drops it in the background)
+  function setup() {
+    var prog = gl.createProgram();
     gl.attachShader(prog, shader(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, shader(gl.FRAGMENT_SHADER, FS));
     gl.linkProgram(prog);
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
-  } catch (e) {
+    gl.useProgram(prog);
+    var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    var aLoc = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(aLoc); gl.vertexAttribPointer(aLoc, 2, gl.FLOAT, false, 0, 0);
+    ['uCss', 'uScale', 'uCtr', 'uRs', 'uTime', 'uRoll', 'uIncl', 'uExpo', 'uInten', 'uQ', 'uWarp', 'uPar', 'uStars'].forEach(function (n) { U[n] = gl.getUniformLocation(prog, n); });
+  }
+  try { setup(); } catch (e) {
     if (window.console) console.warn('arkuzo hole: falling back to the plain sky', e);
     canvas.remove(); arrive(); return;
   }
-  gl.useProgram(prog);
-  var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-  var aLoc = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(aLoc); gl.vertexAttribPointer(aLoc, 2, gl.FLOAT, false, 0, 0);
-  var U = {};
-  ['uCss', 'uScale', 'uCtr', 'uRs', 'uTime', 'uRoll', 'uIncl', 'uExpo', 'uInten', 'uQ', 'uWarp', 'uPar', 'uStars'].forEach(function (n) { U[n] = gl.getUniformLocation(prog, n); });
 
   // the plain star canvas (sky.js) now only draws meteors; its stars come from here so the hole can bend them
   var shared = window.__arkHole = { on: true, meteors: false };
@@ -214,18 +215,36 @@
     var dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
     last = now; time += dt;
     render(dt);
-    // a device that cannot keep up gets fewer pixels (once, after the intro)
+    // a device that cannot keep up gets fewer pixels (after the intro). If fewer pixels do not make it faster, the frame
+    // rate is capped (iPhone Low Power Mode runs at 30 fps), so the sharp picture comes back and tuning stops.
     if (!intro && !tuned && dt) {
-      frames++; if (dt > 0.024) slow++;
-      if (frames >= 90) { tuned = true; if (slow > 45 && quality > 0.55) { quality *= 0.7; layout(); tuned = false; frames = slow = 0; } }
+      dts.push(dt);
+      if (dts.length >= 90) {
+        var med = dts.slice().sort(function (a, b) { return a - b; })[45]; dts.length = 0;
+        if (med <= 0.024) tuned = true;
+        else if (prevMed && med > prevMed * 0.88) { tuned = true; quality = prevQ; layout(); }
+        else if (quality > 0.55) { prevMed = med; prevQ = quality; quality *= 0.7; layout(); }
+        else tuned = true;
+      }
     }
     raf = requestAnimationFrame(frame);
   }
+  var dts = [], prevMed = 0, prevQ = 1;
   function start() { if (raf || still) return; last = 0; raf = requestAnimationFrame(frame); }
   function stop() { cancelAnimationFrame(raf); raf = 0; }
 
-  window.addEventListener('resize', function () { layout(); if (still) render(0); }, { passive: true });
-  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
+  // iOS fires resize on every step of the address bar sliding in and out: lay out once per frame at most
+  var relayout = 0;
+  window.addEventListener('resize', function () {
+    if (relayout) return;
+    relayout = requestAnimationFrame(function () { relayout = 0; layout(); if (still) render(0); });
+  }, { passive: true });
+  var lost = false;
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (!lost) start(); });
+  canvas.addEventListener('webglcontextlost', function (e) { e.preventDefault(); lost = true; stop(); }, false);
+  canvas.addEventListener('webglcontextrestored', function () {
+    try { setup(); lost = false; layout(); if (still) render(0); else start(); } catch (e) { canvas.remove(); shared.on = false; shared.meteors = true; }
+  }, false);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { layout(); if (still) render(0); });
 
   // test hooks: at(t) freezes the intro at t seconds, play() runs it again
